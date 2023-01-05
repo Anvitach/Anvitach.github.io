@@ -1,0 +1,2661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 2.0.17">
+<title>A First Guide on How to Cope with the Explosion of CVEs for Beginning Software Development Engineers</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
+<style>
+/*! Asciidoctor default stylesheet | MIT License | https://asciidoctor.org */
+/* Uncomment the following line when using as a custom stylesheet */
+/* @import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700"; */
+html{font-family:sans-serif;-webkit-text-size-adjust:100%}
+a{background:none}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+b,strong{font-weight:bold}
+abbr{font-size:.9em}
+abbr[title]{cursor:help;border-bottom:1px dotted #dddddf;text-decoration:none}
+dfn{font-style:italic}
+hr{height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+audio,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type=button],input[type=reset],input[type=submit]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type=checkbox],input[type=radio]{padding:0}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,::before,::after{box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;line-height:1;position:relative;cursor:auto;-moz-tab-size:4;-o-tab-size:4;tab-size:4;word-wrap:anywhere;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+img,object,svg{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:0}
+p{line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #dddddf;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}
+table{background:#fff;margin-bottom:1.25em;border:1px solid #dedede;word-wrap:normal}
+table thead,table tfoot{background:#f7f8f7}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt{background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.center{margin-left:auto;margin-right:auto}
+.stretch{width:100%}
+.clearfix::before,.clearfix::after,.float-group::before,.float-group::after{content:" ";display:table}
+.clearfix::after,.float-group::after{clear:both}
+:not(pre).nobreak{word-wrap:normal}
+:not(pre).nowrap{white-space:nowrap}
+:not(pre).pre-wrap{white-space:pre-wrap}
+:not(pre):not([class^=L])>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background:#f7f7f8;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre{color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;line-height:1.45;text-rendering:optimizeSpeed}
+pre code,pre pre{color:inherit;font-size:inherit;line-height:inherit}
+pre>code{display:block}
+pre.nowrap,pre.nowrap pre{white-space:pre;word-wrap:normal}
+em em{font-style:normal}
+strong strong{font-weight:400}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background:#f7f7f7;border:1px solid #ccc;border-radius:3px;box-shadow:0 1px 0 rgba(0,0,0,.2),inset 0 0 0 .1em #fff;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menuref{color:#000}
+.menuseq b:not(.caret),.menuref{font-weight:inherit}
+.menuseq{word-spacing:-.02em}
+.menuseq b.caret{font-size:1.25em;line-height:.8}
+.menuseq i.caret{font-weight:bold;text-align:center;width:.45em}
+b.button::before,b.button::after{position:relative;top:-1px;font-weight:400}
+b.button::before{content:"[";padding:0 3px 0 2px}
+b.button::after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin:0 auto;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header::before,#header::after,#content::before,#content::after,#footnotes::before,#footnotes::after,#footer::before,#footer::after{content:" ";display:table}
+#header::after,#content::after,#footnotes::after,#footer::after{clear:both}
+#content{margin-top:1.25em}
+#content::before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span::before{content:"\00a0\2013\00a0"}
+#header .details br+span.author::before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark::before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber::after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #dddddf;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #e7e7e9;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc li{line-height:1.3334;margin-top:.3334em}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #e7e7e9;left:auto;right:0}}
+@media screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}
+#content #toc{border:1px solid #e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:none;background:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:hsla(0,0%,100%,.8);line-height:1.44}
+#content{margin-bottom:.625em}
+.sect1{padding-bottom:.625em}
+@media screen and (min-width:768px){#content{margin-bottom:1.25em}
+.sect1{padding-bottom:1.25em}}
+.sect1:last-child{padding-bottom:0}
+.sect1+.sect1{border-top:1px solid #e7e7e9}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor::before,h2>a.anchor::before,h3>a.anchor::before,#toctitle>a.anchor::before,.sidebarblock>.content>.title>a.anchor::before,h4>a.anchor::before,h5>a.anchor::before,h6>a.anchor::before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+details,.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+details{margin-left:1.25rem}
+details>summary{cursor:pointer;display:block;position:relative;line-height:1.6;margin-bottom:.625rem;outline:none;-webkit-tap-highlight-color:transparent}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"";border:solid transparent;border-left:solid;border-width:.3em 0 .3em .5em;position:absolute;top:.5em;left:-1.25rem;transform:translateX(15%)}
+details[open]>summary::before{border:solid transparent;border-top:solid;border-width:.5em .3em 0;transform:translateY(15%)}
+details>summary::after{content:"";width:1.25rem;height:1em;position:absolute;top:.3em;left:-1.25rem}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
+.paragraph.lead>p,#preamble>.sectionbody>[class=paragraph]:first-of-type p{font-size:1.21875em;line-height:1.6;color:rgba(0,0,0,.85)}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
+@media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
+@media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
+.literalblock pre,.listingblock>.content>pre:not(.highlight),.listingblock>.content>pre[class=highlight],.listingblock>.content>pre[class^="highlight "]{background:#f7f7f8}
+.literalblock.output pre{color:#f7f7f8;background:rgba(0,0,0,.9)}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]::before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:inherit;opacity:.5}
+.listingblock:hover code[data-lang]::before{display:block}
+.listingblock.terminal pre .command::before{content:attr(data-prompt);padding-right:.5em;color:inherit;opacity:.5}
+.listingblock.terminal pre .command:not([data-prompt])::before{content:"$"}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.prettyprint{background:#f7f7f8}
+pre.prettyprint .linenums{line-height:1.45;margin-left:2em}
+pre.prettyprint li{background:none;list-style-type:inherit;padding-left:0}
+pre.prettyprint li code[data-lang]::before{opacity:1}
+pre.prettyprint li:not(:first-child) code[data-lang]::before{display:none}
+table.linenotable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.linenotable td[class]{color:inherit;vertical-align:top;padding:0;line-height:inherit;white-space:normal}
+table.linenotable td.code{padding-left:.75em}
+table.linenotable td.linenos,pre.pygments .linenos{border-right:1px solid;opacity:.35;padding-right:.5em;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}
+pre.pygments span.linenos{display:inline-block;margin-right:.75em}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock:not(.excerpt)>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote::before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.75em;margin-right:.5ex;text-align:right}
+.verseblock{margin:0 1em 1.25em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans-serif;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.025em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract blockquote::before,.quoteblock.excerpt blockquote::before,.quoteblock .quoteblock blockquote::before{display:none}
+.quoteblock.abstract blockquote,.quoteblock.abstract p,.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{line-height:1.6;word-spacing:0}
+.quoteblock.abstract{margin:0 1em 1.25em;display:block}
+.quoteblock.abstract>.title{margin:0 0 .375em;font-size:1.15em;text-align:center}
+.quoteblock.excerpt>blockquote,.quoteblock .quoteblock{padding:0 0 .25em 1em;border-left:.25em solid #dddddf}
+.quoteblock.excerpt,.quoteblock .quoteblock{margin-left:0}
+.quoteblock.excerpt blockquote,.quoteblock.excerpt p,.quoteblock .quoteblock blockquote,.quoteblock .quoteblock p{color:inherit;font-size:1.0625rem}
+.quoteblock.excerpt .attribution,.quoteblock .quoteblock .attribution{color:inherit;font-size:.85rem;text-align:left;margin-right:0}
+p.tableblock:last-child{margin-bottom:0}
+td.tableblock>.content{margin-bottom:1.25em;word-wrap:anywhere}
+td.tableblock>.content>:last-child{margin-bottom:-1.25em}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all>*>tr>*{border-width:1px}
+table.grid-cols>*>tr>*{border-width:0 1px}
+table.grid-rows>*>tr>*{border-width:1px 0}
+table.frame-all{border-width:1px}
+table.frame-ends{border-width:1px 0}
+table.frame-sides{border-width:0 1px}
+table.frame-none>colgroup+*>:first-child>*,table.frame-sides>colgroup+*>:first-child>*{border-top-width:0}
+table.frame-none>:last-child>:last-child>*,table.frame-sides>:last-child>:last-child>*{border-bottom-width:0}
+table.frame-none>*>tr>:first-child,table.frame-ends>*>tr>:first-child{border-left-width:0}
+table.frame-none>*>tr>:last-child,table.frame-ends>*>tr>:last-child{border-right-width:0}
+table.stripes-all>*>tr,table.stripes-odd>*>tr:nth-of-type(odd),table.stripes-even>*>tr:nth-of-type(even),table.stripes-hover>*>tr:hover{background:#f8f8f7}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.checklist,ul.none,ol.none,ul.no-bullet,ol.no-bullet,ol.unnumbered,ul.unstyled,ol.unstyled{list-style-type:none}
+ul.no-bullet,ol.no-bullet,ol.unnumbered{margin-left:.625em}
+ul.unstyled,ol.unstyled{margin-left:0}
+li>p:empty:only-child::before{content:"";display:inline-block}
+ul.checklist>li>p:first-child{margin-left:-1em}
+ul.checklist>li>p:first-child>.fa-square-o:first-child,ul.checklist>li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
+ul.checklist>li>p:first-child>input[type=checkbox]:first-child{margin-right:.25em}
+ul.inline{display:flex;flex-flow:row wrap;list-style:none;margin:0 0 .625em -1.25em}
+ul.inline>li{margin-left:1.25em}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1,td.hdlist2{vertical-align:top;padding:0 .625em}
+td.hdlist1{font-weight:bold;padding-bottom:1.25em}
+td.hdlist2{word-wrap:anywhere}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist td:not([class]):first-child{padding:.4em .75em 0;line-height:1;vertical-align:top}
+.colist td:not([class]):first-child img{max-width:none}
+.colist td:not([class]):last-child{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:4px solid #fff;box-shadow:0 0 0 1px #ddd}
+.imageblock.left{margin:.25em .625em 1.25em 0}
+.imageblock.right{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none;display:inline-block}
+a.image object{pointer-events:none}
+sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
+sup.footnote a,sup.footnoteref a{text-decoration:none}
+sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
+#footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none;margin-left:-1.05em}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background:#00fafa}
+.black{color:#000}
+.black-background{background:#000}
+.blue{color:#0000bf}
+.blue-background{background:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background:#fa00fa}
+.gray{color:#606060}
+.gray-background{background:#7d7d7d}
+.green{color:#006000}
+.green-background{background:#007d00}
+.lime{color:#00bf00}
+.lime-background{background:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background:#7d0000}
+.navy{color:#000060}
+.navy-background{background:#00007d}
+.olive{color:#606000}
+.olive-background{background:#7d7d00}
+.purple{color:#600060}
+.purple-background{background:#7d007d}
+.red{color:#bf0000}
+.red-background{background:#fa0000}
+.silver{color:#909090}
+.silver-background{background:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background:#fafa00}
+span.icon>.fa{cursor:default}
+a span.icon>.fa{cursor:inherit}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note::before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip::before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning::before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution::before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important::before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background:rgba(0,0,0,.8);border-radius:50%;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]::after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
+h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
+p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@page{margin:1.25cm .75cm}
+@media print{*{box-shadow:none!important;text-shadow:none!important}
+html{font-size:80%}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]{border-bottom:1px dotted}
+abbr[title]::after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img,object,svg{page-break-inside:avoid}
+thead{display:table-header-group}
+svg{max-width:100%}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#header,#content,#footnotes,#footer{max-width:none}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #dddddf!important;padding-bottom:0!important}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span::before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]::before{display:block}
+#footer{padding:0 .9375em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+@media amzn-kf8,print{#header>h1:first-child{margin-top:1.25rem}
+.sect1{padding:0!important}
+.sect1+.sect1{border:0}
+#footer{background:none}
+#footer-text{color:rgba(0,0,0,.6);font-size:.9em}}
+@media amzn-kf8{#header,#content,#footnotes,#footer{padding:0}}
+</style>
+</head>
+<body class="book data-line-1">
+<div id="header">
+<h1>A First Guide on How to Cope with the Explosion of CVEs for Beginning Software Development Engineers</h1>
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#Go-to-Top">1. Introduction</a>
+<ul class="sectlevel2">
+<li><a href="#_what_is_a_vulnerability">1.1. What is a vulnerability?</a></li>
+<li><a href="#_what_is_a_cve">1.2. What is a CVE?</a></li>
+<li><a href="#_why_is_there_an_explosion_of_cves_and_why_should_we_care">1.3. Why is there an explosion of CVEs and why should we care?</a></li>
+<li><a href="#_source_of_vulnerabilities">1.4. Source of vulnerabilities</a></li>
+<li><a href="#_running_example">1.5. Running Example</a></li>
+</ul>
+</li>
+<li><a href="#_owasp_dependency_check_tool">2. OWASP Dependency-Check Tool</a></li>
+<li><a href="#_intel_cve_binary_tool">3. Intel CVE Binary Tool</a></li>
+<li><a href="#_codeql">4. CodeQL</a></li>
+<li><a href="#_comby_tool">5. Comby Tool</a></li>
+<li><a href="#_references">References</a></li>
+</ul>
+</div>
+</div>
+<div id="content">
+<div class="sect1 data-line-18">
+<h2 id="Go-to-Top">Chapter 1. Introduction</h2>
+<div class="sectionbody">
+<div class="paragraph data-line-21">
+<p>If you often receive any news or updates about vulnerabilities such as critical vulnerabilities being exploited by hackers, zero-day vulnerabilities or exploits, software vendors releasing patches and fixes, etc. and wonder what all this fuss is about then you are in the right place.<br>
+The core of this whole self-help guide and the one concept which the author is trying to make their readers understand and care about is vulnerabilities. In general English, a vulnerability means an exposure which can make the entity accommodating that exposure susceptible to harm. But what does it mean to have vulnerabilities in a computer system? Why is it important to learn about them? What are different sources of vulnerabilities and how should a beginner software developer handle them? These are few of the questions that author will try to answer in this self-help guide.</p>
+</div>
+<div class="sect2 data-line-24">
+<h3 id="_what_is_a_vulnerability">1.1. What is a vulnerability?</h3>
+<div class="paragraph data-line-26">
+<p>Let&#8217;s first start by addressing what does a vulnerability mean in a computer system.</p>
+</div>
+<div class="admonitionblock important data-line-28">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+A vulnerability is a weakness or a flaw in software or hardware which increases the likelihood of being exploited by an adversary to harm the said software or hardware.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-30">
+<p>In this guide, we will strictly restrict our scope to software vulnerabilities. Now let&#8217;s dig into the above definition. <strong>A flaw or weakness which increases the likelihood of being exploited</strong>: this means that there&#8217;s a possibility of that vulnerability not being exploited at all but it still increases the likelihood of being exploited. There are many vulnerabilities which don&#8217;t even get highly publicized like Heartbleed, Log4Shell, ProxyLogon, Psychic Signatures, etc. and get patched before the outside world even gets to know about them. If a vendor patches a vulnerability before it can be exploited then it is good, right? It is definitely better than a zero-day vulnerability (definition included below). Now, what is a zero-day vulnerability.</p>
+</div>
+<div class="admonitionblock important data-line-32">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+A zero-day vulnerability is a weakness or a flaw which is disclosed to the public before it grabs the attention of the software vendors.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-34">
+<p>They are called zero-day vulnerabilities because the software vendors have exactly zero-days to fix that vulnerability. As those vulnerabilities become public before the software vendors can mitigate them, it becomes harder and critical for those vendors to release patches before adversaries can exploit them.</p>
+</div>
+<div class="paragraph data-line-36">
+<p>But why such a sudden need to learn about vulnerabilities especially for beginner software developers? Since most of you are training to work in a DevOps environment, once you enter the corporate world you will be in one way or other contributing to code bases of softwares, applications, or products. And such code bases include vulnerabilities which we read in news. Of course, many DevOps teams have incorporated security approaches in their DevOps Lifecycle to get around these vulnerabilities such as DevSecOps, DevOpsSec, or SecDevOps but isn&#8217;t it better to incorporate such practices and make them habitual before we start making a contribution to such code bases.</p>
+</div>
+<div class="paragraph data-line-38">
+<p>When taken literally each term signifies where the security coding practices and security testing lie in a Software Development Life Cycle (SDLC). For DevSecOps, the secure coding practices are inculcated once the planning and development part is done but it preempts the deployment and operations part of SDLC. In DevOpsSec, the security review is conducted once the development, continuous integration and continuous deployment is finished. Further in SecDevOps, the secure practices are integrated into the workflow of development and deployment part. Most firms and companies adapt the mentioned practices above or practices that are analogous to them. Handling vulnerabilities becomes an essential part of this process regardless of the set of practices being chosen.</p>
+</div>
+</div>
+<div class="sect2 data-line-40">
+<h3 id="_what_is_a_cve">1.2. What is a CVE?</h3>
+<div class="paragraph data-line-42">
+<p>Common Vulnerabilities and Exposures (CVE) is a record list of computer security vulnerabilities discovered in software vendor systems. This record is maintained by MITRE Corporation and can be accessed publicly in MITRE CVE website<sup><a href="#reference-three">[3]</a></sup>. These records can also be accessed through CVE Git Pilot repository<sup><a href="#reference-four">[4]</a></sup> or NIST&#8217;s National Vulnerability Database (NVD)<sup><a href="#reference-five">[5]</a></sup>.<br>
+Let&#8217;s have a look at Log4Shell vulnerability entry<sup><a href="#reference-six">[6]</a></sup> at NVD and learn more about CVE entries whose partial representation can be seen in <a href="#Figure-one">Figure 1.</a>.</p>
+</div>
+<div class="exampleblock data-line-45">
+<div class="content">
+<div id="Figure-one" class="paragraph data-line-47">
+<p>Figure 1. CVE entry of Log4Shell vulnerability</p>
+</div>
+<div class="literalblock data-line-48">
+<div class="content">
+<pre>CVE-2021-44228 Detail                                      <b class="conum">(1)</b>
+
+Current Description
+
+Apache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. From log4j 2.15.0, this behavior has been disabled by default. From version 2.16.0 (along with 2.12.2, 2.12.3, and 2.3.1), this functionality has been completely removed. Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects.        <b class="conum">(2)</b>
+
+
+
+Severity CVSS Version 3.x CVSS Version 2.0                 <b class="conum">(3)</b>
+
+CVSS 3.x Severity and Metrics:
+
+NIST: NVD       Base Score: 10.0 CRITICAL                  <b class="conum">(4)</b>
+Vector:  CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H
+
+
+
+Weakness Enumeration
+CWE-ID	    CWE Name	                           Source
+
+CWE-917	    Improper Neutralization of Special Elements used in an Expression Language Statement ('Expression La	                                    NIST   <b class="conum">(5)</b>
+CWE-400	    Uncontrolled Resource Consumption       Apache Software Foundation
+                                                           <b class="conum">(5)</b>
+CWE-20	    Improper Input Validation	            Apache Software Foundation
+                                                           <b class="conum">(5)</b>
+CWE-502	    Deserialization of Untrusted Data	    Apache Software Foundation
+                                                           <b class="conum">(5)</b>
+
+
+
+Known Affected Software Configurations Switch to CPE 2.2
+
+Configuration 1 ( hide )
+
+* cpe:2.3:a:apache:log4j:2.0:-:*:*:*:*:*:*                 <b class="conum">(6)</b>
+* cpe:2.3:a:apache:log4j:2.0:beta9:*:*:*:*:*:*             <b class="conum">(6)</b>
+* cpe:2.3:a:apache:log4j:2.0:rc1:*:*:*:*:*:*               <b class="conum">(6)</b>
+* cpe:2.3:a:apache:log4j:2.0:rc2:*:*:*:*:*:*               <b class="conum">(6)</b>
+* cpe:2.3:a:apache:log4j:*:*:*:*:*:*:*:*            From (including)2.0.1   Up to (excluding)2.3.1
+                                                           <b class="conum">(6)</b>
+* cpe:2.3:a:apache:log4j:*:*:*:*:*:*:*:*            From (including)2.4.0   Up to (excluding)2.12.2
+                                                           <b class="conum">(6)</b>
+* cpe:2.3:a:apache:log4j:*:*:*:*:*:*:*:*            From (including)2.13.0	Up to (excluding)2.15.0
+                                                           <b class="conum">(6)</b></pre>
+</div>
+</div>
+<div class="colist arabic data-line-102">
+<ol>
+<li>
+<p>CVE ID</p>
+</li>
+<li>
+<p>Vulnerability description</p>
+</li>
+<li>
+<p>CVSS versions</p>
+</li>
+<li>
+<p>CVSS base Score for the vulnerability</p>
+</li>
+<li>
+<p>CWEs that a vulnerability inherits</p>
+</li>
+<li>
+<p>Affected CPEs</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-105">
+<p>As we can see in <a href="#Figure-one">Figure 1. &lt;1&gt; </a>, we can notice a CVE ID which is given to each vulnerability to uniquely identify them. These CVE IDs are assigned to vulnerabilities by CVE Assignment team and/or by CVE Numbering Authorities (CNAs) who address vulnerabilities lying in their scopes. <a href="#Figure-one">Figure 1. &lt;2&gt; </a> addresses the description of each vulnerability which inculcates the vulnerability type, the product/software vender, and the affected code base(s). Moving on to <a href="#Figure-one">Figure 1. &lt;3&gt; </a>, it can be easily discerned that there are two versions of Common Vulnerability Scoring System (CVSS) used to score a vulnerability i.e. CVSSv2 and CVSSv3. Most of the vulnerabilities published before July 13, 2022 are scored using CVSSv2 after which it was discontinued by NVD. CVSSv3 was introduced to calculate base score after considering impact on confidentiality, integrity, and availability of the affected system. However, CVSSv3 was introduced in 2015 and many vulnerabilities since then are scored on basis of both CVSSv2 and CVSSv3 which is why Log4Shell has been allocated both CVSSv2 as well as CVSSv3 score. If we take a closer look at <a href="#Figure-one">Figure 1. &lt;4&gt; </a>, we can spot that Log4Shell has been allocated 10.0 base score according to CVSSv3 which is deemed critical. <a href="#Figure-two">Figure 2. </a> can be used as a reference to compare between CVSSv3 and CVSSv2 scores.</p>
+</div>
+<div id="Figure-two" class="paragraph data-line-109">
+<p>Figure 2. CVSSv2 and CVSSv3 Base Score Ranges</p>
+</div>
+<div class="imageblock data-line-111">
+<div class="content">
+<img src="Pictures/ScoreRange.png" alt="ScoreRange" width="480" height="340">
+</div>
+</div>
+<div class="paragraph data-line-113">
+<p>Next, <a href="#Figure-one">Figure 1. &lt;5&gt; </a> informs us about the Common Weakness Enumeration (CWE) categories in which a particular vulnerability lies. CWE is a list of types of weaknesses found in hardware and softwares. These weaknesses can be considered as the origin of vulnerabilities.</p>
+</div>
+<div class="paragraph data-line-115">
+<p>A CWE has nothing to do with a product or software or system. It can be common amongst multiple vulnerabilities and a vulnerability can belong to multiple CWEs. Finally, <a href="#Figure-one">Figure 1. &lt;6&gt; </a> represents Common Platform Enumeration (CPE) associated with the vulnerability. CPEs are naming format structure to identify specific platforms, applications, systems, etc. With the help of this, vendors of those products can identify which versions of their product are affected by that vulnerability. The naming format according to Acunetix&#8217;s Common Platform Enumeration website<sup><a href="#reference-seven">[7]</a></sup> is</p>
+</div>
+<div class="sidebarblock data-line-117">
+<div class="content">
+<div class="paragraph data-line-119">
+<p>cpe:2.3: &lt;part&gt;:&lt;vendor&gt;:&lt;product&gt;:&lt;version&gt;:&lt;update&gt;:&lt;edition&gt;:&lt;language&gt;</p>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-123">
+<p>where<br>
+* part: Defines the type of system detected, and can have one of the following values:<br>
+    a - for Application<br>
+    h - for Hardware<br>
+    o - for Operating System<br>
+* vendor: Contains the name of the organization that developed the product.<br>
+* product: Contains the name of the product that has been detected.<br>
+* version: Lists the version number for the product.<br>
+* update: Lists the update for the product and version detected.<br>
+* edition: Shows the edition of the software.<br>
+language: Shows the language detected.</p>
+</div>
+<div class="paragraph data-line-135">
+<p>In <a href="#Figure-one">Figure 1. &lt;6&gt; </a> one of the CPEs can be represented as [part = "a", vendor = "apache", product = "log4j", version = "2.0", update = "beta9", edition = "any variation", language = "English"]. Here * in edition means any variation in edition of that system is affected with that vulnerability. Also, the language is by default English.</p>
+</div>
+</div>
+<div class="sect2 data-line-138">
+<h3 id="_why_is_there_an_explosion_of_cves_and_why_should_we_care">1.3. Why is there an explosion of CVEs and why should we care?</h3>
+<div class="paragraph data-line-140">
+<p>Now that we&#8217;ve gathered enough information about CVEs, we have to understand why is the author stressing on this subject. If the author asked you to make a guess right now about how many vulnerabilities in total have been discovered as of now, how much would you guess? 10,000? 50,000? 100,000?</p>
+</div>
+<div id="Figure-three" class="paragraph data-line-143">
+<p>Figure 3. Number of vulnerabilities by year</p>
+</div>
+<div class="imageblock data-line-145">
+<div class="content">
+<img src="Pictures/VulnerabilityGraph.png" alt="Vulnerability Graph">
+</div>
+</div>
+<div class="paragraph data-line-149">
+<p>Let me tell you the current number of vulnerabilities, till the author finished this guide which is around January 2023 is 192,255. And around 57% of these vulnerabilities have been discovered from 2017-2022 as can be seen in <a href="#Figure-three">Figure 3.</a> and it has been increasing every year abruptly in that range.</p>
+</div>
+<div class="paragraph data-line-151">
+<p>In the past year, 18 vulnerabilities inhabited Microsoft Exchange Server out of which 2 of those were considered zero-day vulnerabilities which were used late in this year by attackers to perform Active Directory reconnaissance and data exfiltration<sup><a href="#reference-eight">[8]</a></sup>. Although Apple products didn&#8217;t experience any high-profile attacks, they still have come into 385 vulnerabilities in 2022 alone<sup><a href="#reference-nine">[9]</a></sup>. Not to mention, the 2 OpenSSL 3.0 vulnerabilities namely CVE 2022-3786 and CVE 2022-3602 published in early November, 2022 which affected 16,000 publicly accessible servers at that time<sup><a href="#reference-ten">[10]</a></sup>.</p>
+</div>
+<div class="paragraph data-line-153">
+<p>The author understands that having vulnerabilities in a system is common but it is important to bring your attention into the fact that irrespective of vendors, products or SDLC approaches companies follow, vulnerabilities can still find their way into their system. In addition to that, a system&#8217;s security is as good as its weakest link and vulnerabilities literally are weaknesses. Through this, the author hopes that the reader has got hold of the CVE explosion scenario that the author is trying to state.</p>
+</div>
+<div class="paragraph data-line-155">
+<p>In an ideal world, the author would wish for computer systems to be developed without any vulnerabilities but as we all know; perfect security is unachievable. However, the author does believe that by arming beginner software developers, who&#8217;ll join such vendors in developing their product with a few vulnerability scanning, searching, and replacing tools/utilities along with a good background of vulnerability management will help those developers navigate through the SDLC approaches mentioned before. Moreover, this&#8217;ll also strengthen their decision making in vulnerability treatment as well as encourage them to perform risk analysis when they encounter such vulnerabilities.</p>
+</div>
+</div>
+<div class="sect2 data-line-158">
+<h3 id="_source_of_vulnerabilities">1.4. Source of vulnerabilities</h3>
+<div class="paragraph data-line-160">
+<p>Vulnerabilities can turn up in a code base because of 2 reasons</p>
+</div>
+<div class="ulist data-line-162">
+<ul>
+<li class="data-line-162">
+<p>Upstream components</p>
+</li>
+<li class="data-line-163">
+<p>In-house generation</p>
+</li>
+</ul>
+</div>
+<div class="sect3 data-line-165">
+<h4 id="_upstream_components">1.4.1. Upstream components</h4>
+<div class="paragraph data-line-167">
+<p>Before we understand what upstream components are we need to first learn about SBOM.</p>
+</div>
+<div class="admonitionblock important data-line-169">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+Software Bill of Materials (SBOM) is a comprehensive list of components, packages, libraries, etc. used in order to create a code base.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-171">
+<p>This term has been adapted from Bill of Materials used in manufacturing which is a list of parts, raw materials and components used in building a product. Understanding SBOM is necessary because even though we might not have felt the need to understand about various building blocks of code bases yet, once we enter the industry of software or product development we will need to learn it one way or the other. During our degree programs, we are taught to create our own programs and type every line of our program code from the scratch in order to strengthen our programming skills; but when it comes to organizations, their products consist of thousand and million lines of code which might use multiple open source and third-party components. These third-party components could be reusable software units which are free and publicly licensed, or sold by third-party vendors, or developed by the same organization used in their past projects. For example, earlier author gave an example of OpenSSL 3.0 vulnerabilities which affected 16,000 servers. Here, OpenSSL 3.0 is the software library used in multiple applications which is why just 2 vulnerabilities in this library were able to affect so many systems. Such upstream components make it easier for adversaries to carry out supply-chain attacks.</p>
+</div>
+<div class="paragraph data-line-173">
+<p>Open Source Security and Risk Analysis (OSSRA) 2022 report<sup><a href="#reference-eleven">[11]</a></sup> documents that 97% of the 2400 code bases which were analyzed contained open source components and 78% of these code bases was generated by open source components. There are many times that developers make use of open source components without even knowing about them which is why formulating a SBOM for code bases as well as frequently using vulnerability scanners on code bases is essential. The author will eventually present OWASP Dependency-Check and Intel CVE Binary tools which can be used for this purpose.</p>
+</div>
+</div>
+<div class="sect3 data-line-176">
+<h4 id="_in_house_generation">1.4.2. In-house generation</h4>
+<div class="paragraph data-line-178">
+<p>Once, we create SBOM and learn how to handle upstream vulnerabilities we are not even half way done with our vulnerability management practice. But before we move forward we need to learn what do bugs mean in a computer system</p>
+</div>
+<div class="admonitionblock important data-line-180">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Important</div>
+</td>
+<td class="content">
+A bug is an error or defect in a software or hardware which cause the same to behave unexpectedly.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-182">
+<p>Again as the scope of this guide is limited to the software environment, we&#8217;ll only focus on software bugs. Vulnerabilities are merely a subset of bugs. These bugs can be caused by poor programming practices and/or poor design logic. In fact, Number of Faults per Line of Code<sup><a href="#reference-twelve">[12]</a></sup> says that as the number of lines of code increases, the probability of number of faults is expected to increase as well. Further, their study indicated that a 100 lines of code can have a fault rate of 0.6 to 1.7. Of course, they are lots of variables that come into play while estimating fault rates such as the type of programming language used, the developer&#8217;s programming skill, complexity of the code, etc. but most of the studies circle around the above mentioned fault rate. If rounded off then it means that there&#8217;s a good probability of finding 0 to 2 bugs in 100 lines of code.</p>
+</div>
+<div class="paragraph data-line-184">
+<p>Many of the bugs which are published till now are results of poor secure programming practices or lack of proper code testing. For example, let&#8217;s have a look again at <a href="#Figure-one">Figure 1. &lt;5&gt; </a>. One of the CWEs listed there is CWE-20 i.e. Improper Input validation. More information about this CWE can be gathered from CWE MITRE website<sup><a href="#reference-thirteen">[13]</a></sup> but if loosely translated, inheritance of this weakness means that the input being transferred between different components of the code isn&#8217;t validated which can eventually be used for code execution. It is harder to discern whether this weakness was inherited by Apache Log4j2 by some other upstream component or generated by developers in Apache4j2&#8217;s code base but it is clear that is a result of poor secure programming practice carried by someone in the hierarchy of ApacheLog4j2 which in the end led to Log4Shell vulnerability.</p>
+</div>
+<div class="paragraph data-line-186">
+<p>All of these occurrences can be reduced by performing semantic as well as syntactic analysis of written code which should be made part of vulnerability management practice. The author will eventually present CodeQL analysis engine and Comby tool which can be used for this purpose.</p>
+</div>
+</div>
+</div>
+<div class="sect2 data-line-188">
+<h3 id="_running_example">1.5. Running Example</h3>
+<div class="paragraph data-line-190">
+<p>In order to make their readers understand the functioning and features of the above mentioned tools, the author has orchestrated a hypothetical student Anna Chadwick who is working on a project available on her Github repository where she&#8217;ll be encountered making use of all these tools. This example will be used throughout the self-help guide so, the author advises their readers to keep themselves in track with Anna Chadwick&#8217;s project.</p>
+</div>
+<div class="paragraph data-line-192">
+<p><em>Anna Chadwick is a Masters student finishing her studies with Computer Science as her major. She is currently taking a Cryptography course in which she wishes to study and compare between Libgcrypt&#8217;s Elliptic Curve Digital Signature Algorithm (ECDSA) with her own created variant of ECDSA which she has programmed in Java. As she&#8217;s planning to store the data and keys used in this project securely in a server environment she&#8217;ll be doing that via Node.js. She maintains this project on her Github repository Anna&#8217;s GitHub Repository<sup><a href="#reference-fourteen">[14]</a></sup>. While she creates this project she comes across various vulnerabilities and learns how to handle and prevent them.</em></p>
+</div>
+<div id="Caution" class="admonitionblock caution data-line-195">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Caution</div>
+</td>
+<td class="content">
+The project contained in the above mentioned repository is not an actual functioning software. The author has deposited only partial components of the project in the repository which are required to understand the functioning of these tools and to follow this self-help guide.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock warning data-line-197">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">
+This GitHub Repository is the Initial Project of Anna containing all of the files and packages she will be using throughout this self-help guide. So changes depicted in this self-help guide through the tools/technologies will not be visible to the readers of this self-help guide. To understand the changes these tools/technologies offer, the author suggests their readers to install all the tools/technologies and then use them on the GitHub repository mentioned.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1 data-line-200">
+<h2 id="_owasp_dependency_check_tool">Chapter 2. OWASP Dependency-Check Tool</h2>
+<div class="sectionbody">
+<div class="paragraph data-line-202">
+<p>What is OWASP dependency-check tool?</p>
+</div>
+<div class="paragraph data-line-204">
+<p>If one surfs the internet it is very easy to find that OWASP dependency-check is a free, open-source Software Composition Analysis (SCA) tool. SCA tools are used basically to identify open source and third-party components in a software code base by creating a SBOM. The tool in short, maps all open-source components with a developer&#8217;s source code and detects all possible components and packages used in a software build. SCA is part of Application Security Testing (AST) which only focuses on dependencies and not on the part of the code written by developers.</p>
+</div>
+<div class="paragraph data-line-206">
+<p>Such software components and dependencies need to be tracked and scanned in a code base because organizations' code bases are depending on said upstream third-party software components which also bring the possibility of harboring software vulnerabilities along with them. We as software developers need to develop a practice of scanning our code base for vulnerabilities in order to maintain code hygiene. SCA tools like OWASP dependency-check assist developers like us to identify those vulnerabilities and platforms that have brought those vulnerabilities in our code.</p>
+</div>
+<div class="paragraph data-line-208">
+<p>This tool was specifically chosen by the author because firstly, it is open-source and free tool because of which software development engineers wouldn&#8217;t have to pay for commercial tools. Secondly, OWASP Dependency-Check tool was one of pioneers in using SBOM for vulnerability scanning. If the readers wish to choose any other tools then they are free to do so but OWASP Dependency-Check can be considered as the author&#8217;s choice.</p>
+</div>
+<div class="paragraph data-line-210">
+<p>Let&#8217;s dive into the tool and its functionality by going back to our Running Example.</p>
+</div>
+<div class="paragraph data-line-213">
+<p><em>Anna Chadwick had once read about a free software scanning tool named OWASP dependency-check tool which is used to scan code bases for vulnerabilities by referencing the NVD. Being curious about the tool she goes and reads about the tool in Dependency-Check GitHub documentation website <sup><a href="#reference-fifteen">[15]</a></sup>. Guessing that the tool can serve as a means to look for open-source vulnerabilities in her project, she followed the simple instructions provided in the Dependency-Check GitHub repository<sup><a href="#reference-sixteen">[16]</a></sup> to install and run dependency-check on her working folder. The command she used to run OWASP dependency-check on her command line was -</em></p>
+</div>
+<div class="sidebarblock data-line-216">
+<div class="content">
+<div class="paragraph data-line-218">
+<p>$ dependency-check --scan path/to/file/or/folder/to/be/scanned</p>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-222">
+<p><em>Running the above command, resulted in the dependency-check report<sup><a href="#reference-sixteen">[16]</a></sup> whose partial snapshot can be seen below in <a href="#Figure-four">Figure 4.</a>.</em></p>
+</div>
+<div class="exampleblock data-line-225">
+<div class="content">
+<div id="Figure-four" class="paragraph data-line-227">
+<p>Figure 4. Initial OWASP Dependency-Check Report of Anna&#8217;s Project</p>
+</div>
+<div class="literalblock data-line-228">
+<div class="content">
+<pre>Project:
+
+Scan Information:
+    * dependency-check version: 7.1.2
+    * Report Generated On: Thu, 20 Oct 2022 18:09:50 -0400
+    * Dependencies Scanned: 1 (1 unique)                   <b class="conum">(1)</b>
+    * Vulnerable Dependencies: 0
+    * Vulnerabilities Found: 0                             <b class="conum">(2)</b>
+    * Vulnerabilities Suppressed: 0
+    * NVD CVE Checked: 2022-10-20T18:09:46
+    * NVD CVE Modified: 2022-10-20T16:00:02
+    * VersionCheckOn: 2022-10-17T21:41:50
+
+
+Summary
+
+Display: Showing All Dependencies
+
+Dependency	         Vulnerability IDs	Package	 Highest Severity  CVE Count  Confidence  Evidence Count
+AnnaProject.jar 			 	         0		  3        <b class="conum">(3)</b>
+
+
+Dependencies
+
+AnnaProject.jar
+File Path: /path/to/AnnaProject.jar
+MD5: xxxxxxxxxxxxxxxxxxxxxxxx
+SHA1: xxxxxxxxxxxxxxxxxxxxxxxx
+SHA256:xxxxxxxxxxxxxxxxxxxxxxxx
+
+
+Evidence
+
+Type	    Source	    Name	        Value	            Confidence
+Vendor	    file	    name	        AnnaProject 	    High
+Vendor	    jar	        package name	PsychicECDSA	    Low
+Vendor	    jar	        package name	MessageScrambler	Low
+Product	    file	    name	        AnnaProject 	    High
+
+
+Identifiers
+
+None</pre>
+</div>
+</div>
+<div class="colist arabic data-line-277">
+<ol>
+<li>
+<p>Number of dependencies scanned</p>
+</li>
+<li>
+<p>Number of vulnerabilities found</p>
+</li>
+<li>
+<p>Only dependency in the project</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-282">
+<p><em>Aligning with her anticipation, the dependency-check report as can be seen in <a href="#Figure-four">Figure 4.</a> disclosed 0 vulnerabilities as can be seen in <a href="#Figure-four">Figure 4. &lt;2&gt; </a> in her project. Before moving on, Anna takes a few minutes to read and understand the report. Starting from the top down the first thing she sees in the report is the number of dependencies scanned which was just 1 at the moment as can be seen in <a href="#Figure-four">Figure 4. &lt;1&gt; </a>. She realizes that the only dependency present in her project is the one she created. Although there was just 1 dependency according to OWASP dependency-check report, she was puzzled as to why the tool was considering her in-house code as a dependency. To get more information about this, she scouted out the Dependency-Check GitHub documentation File Type Analyzers webpage<sup><a href="#reference-seventeen">[17]</a></sup> where she found out that the files in her project that satisfy the criteria set for any of the Analyzers then those files are automatically considered to be a dependency by the OWASP dependency-check tool. For Example, in Anna&#8217;s case, the <strong>AnnaProject.jar</strong> fulfilled the criteria of Archive Type Analyzer which made it a dependency for the dependency-check tool. This can again be confirmed from <a href="#Figure-four">Figure 4. &lt;3&gt; </a> where <strong>AnnaProject.jar</strong> is listed as a dependency.</em></p>
+</div>
+<div class="paragraph data-line-284">
+<p><em>Anna Chadwick now downloads Gradle which is a known automated build tool. She believes it will be suitable for her project. In order to ease her management of multiple dependencies, and prepare proper documentation of her project through JavaDoc tool she chose Gradle as these features are automated through Gradle which also has a Visual Studio Code extension.</em></p>
+</div>
+<div class="paragraph data-line-286">
+<p><em>Once she settled her project into the Gradle environment as can be seen in Anna&#8217;s GitHub Repository<sup><a href="#reference-fourteen">[14]</a></sup>, she checks out the different tasks offered by Gradle. She runs the <strong>build</strong> task under the <strong>build</strong> task category on her project which would assemble and then test her project which worked successfully for her project. Further, she runs the <strong>javadoc</strong> task under the <strong>documentation</strong> task category to create API documentation of her project. As soon as the task is successful she realizes that running the previous task created a new folder named <strong>docs</strong> inside her <strong>build</strong> folder as can be seen in Anna&#8217;s GitHub Repository<sup><a href="#reference-fourteen">[14]</a></sup>.</em></p>
+</div>
+<div class="exampleblock data-line-289">
+<div class="content">
+<div id="Figure-five" class="paragraph data-line-291">
+<p>Figure 5. OWASP Dependency-Check Report of Anna&#8217;s Project with JavaDoc tool</p>
+</div>
+<div class="literalblock data-line-292">
+<div class="content">
+<pre>Project:
+
+Scan Information:
+    * dependency-check version: 7.1.2
+    * Report Generated On: Mon, 17 Oct 2022 21:41:56 -0400
+    * Dependencies Scanned: 12 (12 unique)                   <b class="conum">(1)</b>
+    * Vulnerable Dependencies: 1                             <b class="conum">(2)</b>
+    * Vulnerabilities Found: 4                               <b class="conum">(3)</b>
+    * Vulnerabilities Suppressed: 0
+    * NVD CVE Checked: 2022-10-17T21:41:50
+    * NVD CVE Modified: 2022-10-17T20:00:02
+    * VersionCheckOn: 2022-10-17T21:41:50
+
+
+Summary
+
+Display: Showing Vulnerable Dependencies
+
+Dependency	       Vulnerability IDs	Package	                          Highest Severity  CVE Count  Confidence  Evidence Count
+jquery-ui.min.js		                pkg:javascript/jquery-ui@1.12.1	  MEDIUM	        4
+                    3                                        <b class="conum">(4)</b>
+
+
+Dependencies
+
+jquery-ui.min.js
+File Path: /path/to/jquery-ui.min.js                         <b class="conum">(5)</b>
+MD5: xxxxxxxxxxxxxxxxxxxxxxxx
+SHA1: xxxxxxxxxxxxxxxxxxxxxxxx
+SHA256:xxxxxxxxxxxxxxxxxxxxxxxx
+
+
+Evidence
+
+Type	    Source	    Name	    Value	    Confidence
+Vendor	    file	    name	    jquery-ui	High
+Product	    file	    name	    jquery-ui	High
+Version	    file	    version	    1.12.1	    High         <b class="conum">(6)</b>
+
+
+Identifiers
+
+pkg:javascript/jquery-ui@1.12.1  (Confidence:Highest)
+
+
+Published Vulnerabilities
+
+CVE-2021-41182  suppress                                     <b class="conum">(7)</b>
+
+jQuery-UI is the official jQuery user interface library. Prior to version 1.13.0, accepting the value of the `altField` option of the Datepicker widget from untrusted sources may execute untrusted code. The issue is fixed in jQuery UI 1.13.0. Any string value passed to the `altField` option is now treated as a CSS selector. A workaround is to not accept the value of the `altField` option from untrusted sources.                               <b class="conum">(8)</b>
+
+CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+                                                             <b class="conum">(9)</b>
+
+CVSSv2:
+    * Base Score: MEDIUM (4.3)                               <b class="conum">(10)</b>
+    * Vector: /AV:N/AC:M/Au:N/C:N/I:P/A:N
+CVSSv3:
+    * Base Score: MEDIUM (6.1)                               <b class="conum">(11)</b>
+    * Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N
+
+References:
+    * CONFIRM - https://github.com/jquery/jquery-ui/security/advisories/GHSA-9gj3-hwp5-pmwc
+    * CONFIRM - https://security.netapp.com/advisory/ntap-20211118-0004/
+    * CONFIRM - https://www.drupal.org/sa-core-2022-002
+    * CONFIRM - https://www.tenable.com/security/tns-2022-09
+    * FEDORA - FEDORA-2021-013ab302be
+    * FEDORA - FEDORA-2021-51c256bf87
+    * FEDORA - FEDORA-2021-ab38307fc3
+    * MISC - https://blog.jqueryui.com/2021/10/jquery-ui-1-13-0-released/
+    * MISC - https://github.com/jquery/jquery-ui/pull/1954/commits/6809ce843e5ac4128108ea4c15cbc100653c2b63
+    * MISC - https://www.drupal.org/sa-contrib-2022-004
+    * MISC - https://www.oracle.com/security-alerts/cpuapr2022.html
+    * MLIST - [debian-lts-announce] 20220119 [SECURITY] [DLA-2889-1] drupal7 security update
+    * N/A - N/A
+    * info - https://github.com/jquery/jquery-ui/security/advisories/GHSA-9gj3-hwp5-pmwc
+    * info - https://nvd.nist.gov/vuln/detail/CVE-2021-41182
+
+Vulnerable Software &amp; Versions (NVD):
+
+    * cpe:2.3:a:drupal:drupal:*:*:*:*:*:*:*:* versions from (including) 7.0; versions up to (excluding) 7.86
+    * cpe:2.3:a:jquery:jquery_ui:*:*:*:*:*:*:*:* versions up to (excluding) 1.13.0
+    * cpe:2.3:a:oracle:agile_plm:9.3.6:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:application_express:*:*:*:*:*:*:*:* versions up to (excluding) 22.1.1
+    * cpe:2.3:a:oracle:banking_platform:2.9.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:banking_platform:2.12.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:big_data_spatial_and_graph:*:*:*:*:*:*:*:* versions up to (excluding) 23.1
+    * cpe:2.3:a:oracle:big_data_spatial_and_graph:23.1:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_interactive_session_recorder:6.4:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_operations_monitor:4.3:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_operations_monitor:4.4:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_operations_monitor:5.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:hospitality_inventory_management:9.1.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:hospitality_materials_control:18.1:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:hospitality_suite8:*:*:*:*:*:*:*:* versions from (including) 8.11.0; versions up to (including) 8.14.0
+    * cpe:2.3:a:oracle:hospitality_suite8:8.10.2:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:jd_edwards_enterpriseone_tools:*:*:*:*:*:*:*:* versions up to (including) 9.2.6.3
+    * cpe:2.3:a:oracle:mysql_enterprise_monitor:*:*:*:*:*:*:*:* versions up to (including) 8.0.29
+    * cpe:2.3:a:oracle:peoplesoft_enterprise_peopletools:8.58:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:peoplesoft_enterprise_peopletools:8.59:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:policy_automation:*:*:*:*:*:*:*:* versions from (including) 12.2.0; versions up to (including) 12.2.25
+    * cpe:2.3:a:oracle:primavera_unifier:*:*:*:*:*:*:*:* versions from (including) 17.7; versions up to (including) 17.12
+    * cpe:2.3:a:oracle:primavera_unifier:17.7:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:17.8:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:17.9:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:17.10:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:17.11:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:17.12:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:18.8:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:19.12:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:20.12:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:21.12:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:rest_data_services:*:*:*:*:-:*:*:* versions up to (excluding) 22.1.1
+    * cpe:2.3:a:oracle:rest_data_services:22.1.1:*:*:*:-:*:*:*
+    * cpe:2.3:a:oracle:weblogic_server:12.2.1.3.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:weblogic_server:12.2.1.4.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:weblogic_server:14.1.1.0.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:tenable:tenable.sc:*:*:*:*:*:*:*:* versions up to (excluding) 5.21.0
+
+
+CVE-2021-41183  suppress                                     <b class="conum">(7)</b>
+
+jQuery-UI is the official jQuery user interface library. Prior to version 1.13.0, accepting the value of various `*Text` options of the Datepicker widget from untrusted sources may execute untrusted code. The issue is fixed in jQuery UI 1.13.0. The values passed to various `*Text` options are now always treated as pure text, not HTML. A workaround is to not accept the value of the `*Text` options from untrusted sources.                  <b class="conum">(8)</b>
+
+CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+                                                             <b class="conum">(9)</b>
+
+CVSSv2:
+    * Base Score: MEDIUM (4.3)                               <b class="conum">(10)</b>
+    * Vector: /AV:N/AC:M/Au:N/C:N/I:P/A:N
+CVSSv3:
+    * Base Score: MEDIUM (6.1)                               <b class="conum">(11)</b>
+    * Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N
+
+References:
+    * CONFIRM - https://github.com/jquery/jquery-ui/security/advisories/GHSA-j7qv-pgf6-hvh4
+    * CONFIRM - https://security.netapp.com/advisory/ntap-20211118-0004/
+    * CONFIRM - https://www.drupal.org/sa-core-2022-001
+    * CONFIRM - https://www.drupal.org/sa-core-2022-002
+    * CONFIRM - https://www.tenable.com/security/tns-2022-09
+    * FEDORA - FEDORA-2021-013ab302be
+    * FEDORA - FEDORA-2021-51c256bf87
+    * FEDORA - FEDORA-2021-ab38307fc3
+    * MISC - https://blog.jqueryui.com/2021/10/jquery-ui-1-13-0-released/
+    * MISC - https://bugs.jqueryui.com/ticket/15284
+    * MISC - https://github.com/jquery/jquery-ui/pull/1953
+    * MISC - https://www.drupal.org/sa-contrib-2022-004
+    * MISC - https://www.oracle.com/security-alerts/cpuapr2022.html
+    * MLIST - [debian-lts-announce] 20220119 [SECURITY] [DLA-2889-1] drupal7 security update
+    * N/A - N/A
+    * info - https://bugs.jqueryui.com/ticket/15284
+    * info - https://nvd.nist.gov/vuln/detail/CVE-2021-41183
+
+Vulnerable Software &amp; Versions (NVD):
+
+    * cpe:2.3:a:drupal:drupal:*:*:*:*:*:*:*:* versions from (including) 7.0; versions up to (excluding) 7.86
+    * cpe:2.3:a:drupal:drupal:*:*:*:*:*:*:*:* versions from (including) 9.2.0; versions up to (excluding) 9.2.11
+    * cpe:2.3:a:drupal:drupal:*:*:*:*:*:*:*:* versions from (including) 9.3.0; versions up to (excluding) 9.3.3
+    * cpe:2.3:a:jquery:jquery_ui:*:*:*:*:*:*:*:* versions up to (excluding) 1.13.0
+    * cpe:2.3:a:oracle:agile_plm:9.3.6:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:application_express:*:*:*:*:*:*:*:* versions up to (excluding) 22.1.1
+    * cpe:2.3:a:oracle:banking_platform:2.9.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:banking_platform:2.12.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:big_data_spatial_and_graph:*:*:*:*:*:*:*:* versions up to (excluding) 23.1
+    * cpe:2.3:a:oracle:big_data_spatial_and_graph:23.1:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_interactive_session_recorder:6.4:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_operations_monitor:4.3:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_operations_monitor:4.4:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_operations_monitor:5.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:hospitality_inventory_management:9.1.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:hospitality_suite8:*:*:*:*:*:*:*:* versions from (including) 8.11.0; versions up to (including) 11.14.0
+    * cpe:2.3:a:oracle:hospitality_suite8:8.10.2:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:jd_edwards_enterpriseone_tools:*:*:*:*:*:*:*:* versions up to (including) 9.2.6.3
+    * cpe:2.3:a:oracle:mysql_enterprise_monitor:*:*:*:*:*:*:*:* versions up to (including) 8.0.29
+    * cpe:2.3:a:oracle:peoplesoft_enterprise_peopletools:8.58:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:peoplesoft_enterprise_peopletools:8.59:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:policy_automation:*:*:*:*:*:*:*:* versions from (including) 12.2.0; versions up to (including) 12.2.5
+    * cpe:2.3:a:oracle:primavera_gateway:*:*:*:*:*:*:*:* versions from (including) 17.7; versions up to (including) 17.12
+    * cpe:2.3:a:oracle:primavera_gateway:18.8.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_gateway:19.12.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_gateway:20.12.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_gateway:21.12.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:rest_data_services:*:*:*:*:-:*:*:* versions up to (excluding) 22.1.1
+    * cpe:2.3:a:oracle:rest_data_services:22.1.1:*:*:*:-:*:*:*
+    * cpe:2.3:a:oracle:weblogic_server:12.2.1.3.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:weblogic_server:12.2.1.4.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:weblogic_server:14.1.1.0.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:tenable:tenable.sc:*:*:*:*:*:*:*:* versions up to (excluding) 5.21.0
+
+
+CVE-2021-41184  suppress                                     <b class="conum">(7)</b>
+
+jQuery-UI is the official jQuery user interface library. Prior to version 1.13.0, accepting the value of the `of` option of the `.position()` util from untrusted sources may execute untrusted code. The issue is fixed in jQuery UI 1.13.0. Any string value passed to the `of` option is now treated as a CSS selector. A workaround is to not accept the value of the `of` option from untrusted sources.                                           <b class="conum">(8)</b>
+
+CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+                                                             <b class="conum">(9)</b>
+
+CVSSv2:
+    * Base Score: MEDIUM (4.3)                               <b class="conum">(10)</b>
+    * Vector: /AV:N/AC:M/Au:N/C:N/I:P/A:N
+CVSSv3:
+    * Base Score: MEDIUM (6.1)                               <b class="conum">(11)</b>
+    * Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N
+
+References:
+    * CONFIRM - https://github.com/jquery/jquery-ui/security/advisories/GHSA-gpqq-952q-5327
+    * CONFIRM - https://security.netapp.com/advisory/ntap-20211118-0004/
+    * CONFIRM - https://www.drupal.org/sa-core-2022-001
+    * CONFIRM - https://www.tenable.com/security/tns-2022-09
+    * FEDORA - FEDORA-2021-013ab302be
+    * FEDORA - FEDORA-2021-51c256bf87
+    * FEDORA - FEDORA-2021-ab38307fc3
+    * MISC - https://blog.jqueryui.com/2021/10/jquery-ui-1-13-0-released/
+    * MISC - https://github.com/jquery/jquery-ui/commit/effa323f1505f2ce7a324e4f429fa9032c72f280
+    * MISC - https://www.oracle.com/security-alerts/cpuapr2022.html
+    * N/A - N/A
+    * info - https://github.com/jquery/jquery-ui/security/advisories/GHSA-gpqq-952q-5327
+    * info - https://nvd.nist.gov/vuln/detail/CVE-2021-41184
+
+Vulnerable Software &amp; Versions (NVD):
+
+    * cpe:2.3:a:drupal:drupal:*:*:*:*:*:*:*:* versions from (including) 7.0; versions up to (excluding) 7.86
+    * cpe:2.3:a:drupal:drupal:*:*:*:*:*:*:*:* versions from (including) 9.2.0; versions up to (excluding) 9.2.11
+    * cpe:2.3:a:drupal:drupal:*:*:*:*:*:*:*:* versions from (including) 9.3.0; versions up to (excluding) 9.3.3
+    * cpe:2.3:a:jquery:jquery_ui:*:*:*:*:*:*:*:* versions up to (excluding) 1.13.0
+    * cpe:2.3:a:oracle:agile_plm:9.3.6:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:application_express:*:*:*:*:*:*:*:* versions up to (excluding) 22.1.1
+    * cpe:2.3:a:oracle:banking_platform:2.9.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:banking_platform:2.12.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:big_data_spatial_and_graph:*:*:*:*:*:*:*:* versions up to (excluding) 23.1
+    * cpe:2.3:a:oracle:big_data_spatial_and_graph:23.1:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_interactive_session_recorder:6.4:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_operations_monitor:4.3:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_operations_monitor:4.4:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:communications_operations_monitor:5.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:hospitality_inventory_management:9.1.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:hospitality_materials_control:18.1:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:hospitality_suite8:*:*:*:*:*:*:*:* versions from (including) 8.11.0; versions up to (including) 8.14.0
+    * cpe:2.3:a:oracle:hospitality_suite8:8.10.2:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:jd_edwards_enterpriseone_tools:*:*:*:*:*:*:*:* versions up to (including) 9.2.6.3
+    * cpe:2.3:a:oracle:peoplesoft_enterprise_peopletools:8.58:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:peoplesoft_enterprise_peopletools:8.59:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:policy_automation:*:*:*:*:*:*:*:* versions from (including) 12.2.0; versions up to (including) 12.2.25
+    * cpe:2.3:a:oracle:primavera_unifier:*:*:*:*:*:*:*:* versions from (including) 17.7; versions up to (including) 17.12
+    * cpe:2.3:a:oracle:primavera_unifier:18.8:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:19.12:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:20.12:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:primavera_unifier:21.12:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:rest_data_services:*:*:*:*:-:*:*:* versions up to (excluding) 22.1.1
+    * cpe:2.3:a:oracle:rest_data_services:22.1.1:*:*:*:-:*:*:*
+    * cpe:2.3:a:oracle:weblogic_server:12.2.1.3.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:weblogic_server:12.2.1.4.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:oracle:weblogic_server:14.1.1.0.0:*:*:*:*:*:*:*
+    * cpe:2.3:a:tenable:tenable.sc:*:*:*:*:*:*:*:* versions up to (excluding) 5.21.0
+
+
+CVE-2022-31160  suppress                                     <b class="conum">(7)</b>
+
+jQuery UI is a curated set of user interface interactions, effects, widgets, and themes built on top of jQuery. Versions prior to 1.13.2 are potentially vulnerable to cross-site scripting. Initializing a checkboxradio widget on an input enclosed within a label makes that parent label contents considered as the input label. Calling `.checkboxradio( "refresh" )` on such a widget and the initial HTML contained encoded HTML entities will make them erroneously get decoded. This can lead to potentially executing JavaScript code. The bug has been patched in jQuery UI 1.13.2. To remediate the issue, someone who can change the initial HTML can wrap all the non-input contents of the `label` in a `span`.                                     <b class="conum">(8)</b>
+
+CWE-79 Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting')
+                                                             <b class="conum">(9)</b>
+
+CVSSv3:
+    * Base Score: MEDIUM (6.1)                               <b class="conum">(11)</b>
+    * Vector: CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N
+
+References:
+    * CONFIRM - https://github.com/jquery/jquery-ui/security/advisories/GHSA-h6gj-6jjq-h8g9
+    * CONFIRM - https://security.netapp.com/advisory/ntap-20220909-0007/
+    * MISC - https://blog.jqueryui.com/2022/07/jquery-ui-1-13-2-released/
+    * MISC - https://github.com/jquery/jquery-ui/commit/8cc5bae1caa1fcf96bf5862c5646c787020ba3f9
+    * MISC - https://www.drupal.org/sa-contrib-2022-052
+    * info - https://github.com/jquery/jquery-ui/security/advisories/GHSA-h6gj-6jjq-h8g9
+    * info - https://nvd.nist.gov/vuln/detail/CVE-2022-31160
+
+Vulnerable Software &amp; Versions (NVD):
+
+    * cpe:2.3:a:drupal:jquery_ui_checkboxradio:8.x-1.0:*:*:*:*:drupal:*:*
+    * cpe:2.3:a:drupal:jquery_ui_checkboxradio:8.x-1.1:*:*:*:*:drupal:*:*
+    * cpe:2.3:a:drupal:jquery_ui_checkboxradio:8.x-1.2:*:*:*:*:drupal:*:*
+    * cpe:2.3:a:drupal:jquery_ui_checkboxradio:8.x-1.3:*:*:*:*:drupal:*:*
+    * cpe:2.3:a:jqueryui:jquery_ui:*:*:*:*:*:jquery:*:* versions up to (excluding) 1.13.2
+    * cpe:2.3:a:netapp:oncommand_insight:-:*:*:*:*:*:*:*</pre>
+</div>
+</div>
+<div class="colist arabic data-line-590">
+<ol>
+<li>
+<p>Number of dependencies scanned</p>
+</li>
+<li>
+<p>Number of vulnerable dependencies</p>
+</li>
+<li>
+<p>Number of vulnerabilities found</p>
+</li>
+<li>
+<p>Only vulnerable dependency in the project</p>
+</li>
+<li>
+<p>Source path of dependency</p>
+</li>
+<li>
+<p>Affected version of the product</p>
+</li>
+<li>
+<p>CVE and suppress option</p>
+</li>
+<li>
+<p>CVE description</p>
+</li>
+<li>
+<p>CWE associated with the CVE</p>
+</li>
+<li>
+<p>CVSS v2 score of the CVE</p>
+</li>
+<li>
+<p>CVSS v3 score of the CVE</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-593">
+<p><em>As running the <strong>javadoc</strong> task created new files and folder under her working folder, Anna decided to run the dependency-check tool again on the whole working folder. To her surprise, she now witnessed 4 vulnerabilities in her working folder as can be seen in <a href="#Figure-five">Figure 5. &lt;3&gt; </a>.</em></p>
+</div>
+<div class="paragraph data-line-595">
+<p><em>The further Anna goes into the report, the more information she gets about the recent change that was made in her project. Next, she realizes that the number of dependencies in her project had increased from 1 to 12 as can be seen in <a href="#Figure-five">Figure 5. &lt;1&gt; </a> just by running <strong>javadoc</strong> task. She also notices that all of these vulnerabilities are coming from just 1 root dependency as can be seen in <a href="#Figure-five">Figure 5. &lt;2&gt; </a> and the name of the exact dependency can be found in <a href="#Figure-five">Figure 5. &lt;4&gt; </a> which is <strong>jquery-ui.min.js</strong>. Here, she discovers that the evidence count for this dependency is 3 which means that this is the number of evidence identifying the underlying CPE harboring the CVE IDs</em></p>
+</div>
+<div class="paragraph data-line-597">
+<p><em><a href="#Figure-five">Figure 5. &lt;5&gt; </a> informs about where exactly the vulnerable dependency can be found. Moreover, Anna sees that the affected version of jQuery UI is 1.12.1 at <a href="#Figure-five">Figure 5. &lt;6&gt; </a>. Furthermore, at <a href="#Figure-five">Figure 5. &lt;7&gt; </a>, Anna observes the CVE identifier number of each vulnerability. One of the most discernible part of the report was the suppress option next to the CVE identifier numbers. After reading Dependency-Check GitHub documentation Suppressing False Positives webpage<sup><a href="#reference-eighteen">[18]</a></sup>, she discovers that there&#8217;s a possibility to suppress vulnerabilities in case any of them were falsely reported. Now, each CVE&#8217;s description can be seen at <a href="#Figure-five">Figure 5. &lt;8&gt; </a> and CWE associated with that CVE can be seen at <a href="#Figure-five">Figure 5. &lt;9&gt; </a>. CVE description sometimes offers the information about the patched version of the product which can be used to overcome the vulnerabilities in the current version of the product. As can be seen in <a href="#Figure-five">Figure 5. &lt;9&gt; </a> the first 3 vulnerabilities can be fixed if the jQuery UI was updated to 1.13.0 and the last vulnerability can be fixed if the jQuery UI was updated to 1.13.2. All of this information will come in handy when Anna will decide to handle this vulnerable dependency. Finally, each vulnerability&#8217;s severity can be spotted at <a href="#Figure-five">Figure 5. &lt;10&gt; </a> and <a href="#Figure-five">Figure 5. &lt;11&gt; </a> which represent CVSS v2 and CVSS v3 respectively of the reported vulnerabilities.</em></p>
+</div>
+<div class="paragraph data-line-599">
+<p><em>Before handling the reported vulnerable dependency which can be seen at <a href="#Figure-five">Figure 5. &lt;2&gt; </a>, Anna wishes to gather more information about this dependency. Firstly, she chooses to check the <strong>jquery-ui.min.js</strong> file which can be traced using the source path of the dependency using <a href="#Figure-five">Figure 5. &lt;5&gt; </a> at <a href="#Figure-fourteen">Figure 14.</a></em></p>
+</div>
+<div class="admonitionblock note data-line-601">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+As the author has hidden the source file path for <strong>jquery-ui.min.js</strong>, readers can find it in AnnaProject/build/docs/javadoc/script-dir at <a href="#Figure-fourteen">Figure 14.</a>
+</td>
+</tr>
+</table>
+</div>
+<div class="exampleblock data-line-603">
+<div class="content">
+<div id="Figure-six" class="paragraph data-line-605">
+<p>Figure 6. Partial Depiction of jQuery UI vulnerability source</p>
+</div>
+<div class="literalblock data-line-606">
+<div class="content">
+<pre>/*! jQuery UI - v1.12.1 - 2018-12-06                         <b class="conum">(1)</b>
+* http://jqueryui.com
+* Includes: widget.js, position.js, keycode.js, unique-id.js, widgets/autocomplete.js, widgets/menu.js
+* Copyright jQuery Foundation and other contributors; Licensed MIT */</pre>
+</div>
+</div>
+<div class="colist arabic data-line-612">
+<ol>
+<li>
+<p>Version of the jQuery UI</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-615">
+<p><em>After scouting, the whole document, Anna realizes that probably the version of jQuery UI is being identified by one of the comments as can be seen in <a href="#Figure-six">Figure 6. &lt;1&gt; </a>. In order to confirm this theory, she changes the version in <a href="#Figure-six">Figure 6. &lt;1&gt; </a> from <strong>v1.12.1</strong> to <strong>v1.13.2</strong> and then reran the OWASP Dependency-Check tool.</em></p>
+</div>
+<div class="exampleblock data-line-617">
+<div class="content">
+<div id="Figure-seven" class="paragraph data-line-619">
+<p>Figure 7. OWASP Dependency-Check Report of Anna&#8217;s Project with tweaked jQuery UI vulnerability source</p>
+</div>
+<div class="literalblock data-line-620">
+<div class="content">
+<pre>Project:
+
+Scan Information:
+    * dependency-check version: 7.1.2
+    * Report Generated On: Thu, 27 Oct 2022 22:17:08 -0400
+    * Dependencies Scanned: 12 (12 unique)                   <b class="conum">(1)</b>
+    * Vulnerable Dependencies: 0
+    * Vulnerabilities Found: 0                               <b class="conum">(2)</b>
+    * Vulnerabilities Suppressed: 0
+    * NVD CVE Checked: 2022-10-27T22:17:04
+    * NVD CVE Modified: 2022-10-27T20:00:03
+    * VersionCheckOn: 2022-10-17T21:41:50</pre>
+</div>
+</div>
+<div class="colist arabic data-line-636">
+<ol>
+<li>
+<p>Number of dependencies scanned</p>
+</li>
+<li>
+<p>Number of vulnerabilities found</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-639">
+<p><em>As can be seen in the partial snapshot provided above at <a href="#Figure-seven">Figure 7. &lt;2&gt; </a>, the number of vulnerabilities detected in her project has returned to 0 and the number of dependencies scanned remains 12 as  can be ensured from <a href="#Figure-seven">Figure 7. &lt;1&gt; </a>. The above report proves that the version of jQuery UI is only being referenced from the comments of <strong>jquery-ui.min.js</strong>.</em></p>
+</div>
+<div class="admonitionblock note data-line-641">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The version switch in <strong>jquery-ui.min.js</strong> depicted above was just for informational and experimental purposes. The author doesn&#8217;t advise handling vulnerabilities in such a manner as this practice could lead to compatibility issues within the project.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-643">
+<p><em>There&#8217;s a good possibility that the 4 vulnerabilities found in <a href="#Figure-five">Figure 5.</a> could be false positives or could be true positives. Anna hadn&#8217;t worked with jQuery UI before to discern this just by going through the <strong>jquery-ui.min.js</strong> script. Further, she understands that these vulnerabilities could lead to cross-site scripting which she discovered through those CVE IDs' description and their associated CWEs at <a href="#Figure-five">Figure 5. &lt;8&gt; </a> and <a href="#Figure-five">Figure 5. &lt;9&gt; </a> respectively. However, she believes that it is probably unnecessary to tackle cross-site scripting issues in API documentation of HTML format as this documentation will only be used to refer the structure, comments, and documentation of the project. Those files will not be used for any kind of HTML interaction so these vulnerabilities hardly run the risk of being used in cross-site scripting attacks which is why she chooses to suppress these vulnerabilities.</em></p>
+</div>
+<div class="paragraph data-line-646">
+<p><em>Anna remembers that she read about suppressing vulnerabilities at the Dependency-Check GitHub documentation Suppressing False Positives webpage<sup><a href="#reference-eighteen">[18]</a></sup>. According to the webpage she copies the xml code of each vulnerability through the suppress option as she had discovered in <a href="#Figure-five">Figure 5. &lt;7&gt; </a> and pastes them in a new file named <strong>Suppress.xml</strong> as can be seen in Anna&#8217;s GitHub Repository<sup><a href="#reference-fourteen">[14]</a></sup> Now she can use that suppression file for future uses to overcome those vulnerabilities. The command she used this time to generate a new dependency-check report through her command line was -</em></p>
+</div>
+<div class="sidebarblock data-line-649">
+<div class="content">
+<div class="paragraph data-line-651">
+<p>$ dependency-check --scan path/to/file/or/folder/to/be/scanned --suppression path/to/xml/file/used/for/ suppression</p>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-655">
+<p><em>Running the above command, resulted in the dependency-check report as can be seen in <a href="#Figure-eight">Figure 8.</a> whose partial snapshot can be seen below._</em></p>
+</div>
+<div class="exampleblock data-line-657">
+<div class="content">
+<div id="Figure-eight" class="paragraph data-line-659">
+<p>Figure 8. OWASP Dependency-Check Report of Anna&#8217;s Project with suppressed vulnerabilities</p>
+</div>
+<div class="literalblock data-line-660">
+<div class="content">
+<pre>Project:
+
+Scan Information:
+    * dependency-check version: 7.1.2
+    * Report Generated On: Wed, 2 Nov 2022 21:53:01 -0400
+    * Dependencies Scanned: 12 (12 unique)                   <b class="conum">(1)</b>
+    * Vulnerable Dependencies: 0                             <b class="conum">(2)</b>
+    * Vulnerabilities Found: 0                               <b class="conum">(3)</b>
+    * Vulnerabilities Suppressed: 4                          <b class="conum">(4)</b></pre>
+</div>
+</div>
+<div class="colist arabic data-line-675">
+<ol>
+<li>
+<p>Number of dependencies scanned</p>
+</li>
+<li>
+<p>Number of vulnerable dependencies</p>
+</li>
+<li>
+<p>Number of vulnerabilities found</p>
+</li>
+<li>
+<p>Number of vulnerabilities suppressed</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-678">
+<p><em>As can be seen in <a href="#Figure-eight">Figure 8. &lt;1&gt; </a> the number of dependencies scanned is still 12 which means all of those dependencies still exist in Anna&#8217;s project. However, according to <a href="#Figure-eight">Figure 8. &lt;2&gt; </a> and <a href="#Figure-eight">Figure 8. &lt;3&gt; </a> the number of vulnerable dependencies and the number of vulnerabilities is 0 now. In addition to that, number of suppressed vulnerabilities is now 4 as can be seen in <a href="#Figure-eight">Figure 8. &lt;4&gt; </a> which confirms that those 4 vulnerabilities have been successfully suppressed.</em></p>
+</div>
+<div class="paragraph data-line-681">
+<p>OWASP Dependency-check is a very handy tool when one wants to isolate vulnerabilities inherited through open source and third-party components. NVD is the main source of data feed for OWASP Dependency-Check tool due to which the author supports the idea of running the tool with an internet connection. Stale database could lead for many new vulnerabilities not being checked by the tool and since there is an explosion of CVEs it becomes indispensable for new Software Development Engineers to get in the practice of managing vulnerabilities through SCA tools.</p>
+</div>
+</div>
+</div>
+<div class="sect1 data-line-684">
+<h2 id="_intel_cve_binary_tool">Chapter 3. Intel CVE Binary Tool</h2>
+<div class="sectionbody">
+<div class="paragraph data-line-686">
+<p>Unlike OWASP Dependency-Check, CVE Binary tool is a binary scanner, also used to isolate and identify vulnerable open-source components. When organizations make use of third-party components such as containers or databases, etc. these kind of components which come in object forms don&#8217;t often have source codes which is why binary scanning of such files is necessary. Binary Scanners are adept in handling such situations. Moreover, binary scanners also procreate SBOM of a software&#8217;s final build before scanning for vulnerabilities.</p>
+</div>
+<div class="paragraph data-line-688">
+<p>The author chose this tool because again it is a free open-source tool. Another reason why the author chose this tool because it is backed by Intel. Backed by such a pioneer organization the owners of its repository have made it a point to keep updating that tool. In the past year, the author herself has seen this tool advance. A tool which was a binary scanner at first now uses SBOM to identify upstream libraries.</p>
+</div>
+<div class="paragraph data-line-690">
+<p>To understand more about this tool, let&#8217;s go back to our Running Example.</p>
+</div>
+<div class="paragraph data-line-692">
+<p><em>After having encountered her first set of vulnerabilities, Anna wanted to be a little bit more attentive towards CVEs as she was planning on using more open-source libraries such as OpenSSL for her project. While surfing for SCA tools, she came across Intel&#8217;s CVE Binary Tool, which is a binary scanner also used to find known vulnerabilities. She went ahead and installed CVE binary tool through simple steps mentioned in the Intel CVE Binary Tool Installation Github page<sup><a href="#reference-twenty">[20]</a></sup>. Before, including Libgcrypt library into her project, she wanted the CVE binary tool to scan her project which she did by running the following command in her terminal -</em></p>
+</div>
+<div class="sidebarblock data-line-695">
+<div class="content">
+<div class="paragraph data-line-697">
+<p>$ cve-bin-tool path/to/file/or/folder/to/be/scanned</p>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-701">
+<p><em>After running the above command, CVE binary tool gave the following output as can be seen below</em></p>
+</div>
+<div class="exampleblock data-line-704">
+<div class="content">
+<div id="Figure-nine" class="paragraph data-line-706">
+<p>Figure 9. CVE Binary Tool Outcome of Anna&#8217;s Initial Project</p>
+</div>
+<div class="literalblock data-line-707">
+<div class="content">
+<pre>[16:45:47] INFO     xmlschema - Resource 'XMLSchema.xsd' is      schemas.py:1221
+                    already loaded
+           INFO     cve_bin_tool - CVE Binary Tool v3.1.1             cli.py:365
+           INFO     cve_bin_tool - This product uses the NVD API but  cli.py:366
+                    is not endorsed or certified by the NVD.
+           INFO     cve_bin_tool - Not using an NVD API key. Your     cli.py:380
+                    access may be rate limited by NVD.
+           INFO     cve_bin_tool - Get an NVD API key here: https://n cli.py:381
+                    vd.nist.gov/developers/request-an-api-key
+           WARNING  cve_bin_tool -                                    cli.py:393
+                                              ***********************
+                    ***********************
+                                              Warning: this utility
+                    was developed for Linux.
+                                              You may need to install
+                    additional utilities
+                                              to use it on other
+                    operating systems.
+                                              ***********************
+                    ***********************
+
+           INFO     cve_bin_tool.CVEDB - Using cached CVE data      cvedb.py:351
+                    (&lt;24h old). Use -u now to update immediately.
+           INFO     cve_bin_tool.CVEDB - There are 189440 CVE       cvedb.py:381
+                    entries in the database                  <b class="conum">(1)</b>
+           INFO     cve_bin_tool - CVE database last updated on 26    cli.py:492
+                    November 2022 at 22:42:44
+           INFO     cve_bin_tool - Number of checkers: 243            cli.py:567
+           INFO     cve_bin_tool.VersionScanner -         version_scanner.py:105
+                    Checkers: accountsservice, acpid, apache_http_server,
+                    apcupsd, asn1c, assimp, asterisk, atftp, avahi, bash, bind,
+                    binutils, bird, bison, boinc, bolt, bro, bubblewrap, busybox,
+                    bzip2, c_ares, chess, chrony, clamav, collectd,
+                    commons_compress, connman, cronie, cryptsetup, cups, curl,
+                    cvs, darkhttpd, davfs2, dbus, dhcpcd, dnsmasq, domoticz,
+                    dovecot, dpkg, e2fsprogs, elfutils, enscript, exim, exiv2,
+                    expat, fastd, ffmpeg, freeradius, file, firefox, freeradius,
+                    freerdp, fribidi, ftp, gcc, gdb, gimp, git, glib, glibc, gmp,
+                    gnomeshell, gnupg, gnutls, gpgme, gpsd, graphicsmagick, grub2,
+                    gstreamer, gupnp, gvfs, haproxy, haserl, hdf5, hostapd,
+                    hunspell, i2pd, icecast, icu, iperf3, ipsec_tools, iptables,
+                    irssi, iucode_tool, jack2, jacksondatabind, janus, jhead,
+                    json_c, kbd, keepalived, kerberos,   kexectools, lftp,
+                    libarchive, libbpg, libconfuse, libdb, libebml, libgcrypt,
+                    libgit2, libical, libinput, libjpeg, libjpeg_turbo, libksba,
+                    liblas, libnss, libpcap, librsvg, librsync, libsamplerate,
+                    libseccomp, libsndfile, libsolv, libsoup, libsrtp, libssh,
+                    libssh2, libtiff, libtomcrypt, libupnp, libvirt, libvncserver,
+                    libvorbis, libxslt, lighttpd, ldpd, logrotate, lua, luajit,
+                    lynx, lz4, mailx, mariadb, mdadm, memcached, minicom, minidlna,
+                    miniupnpc, miniupnpd mosquitto, motion, mpv, mtr, mutt, mysql,
+                    nano, nbd, ncurses, neon, nessus, netatalk, netpbm, nettle,
+                    nghttp2, nginx, nmap, node, ntp, ntpsec, open_vm_tools,
+                    openafs, opencv, openjpeg, openldap, openssh, openssl,
+                    openswan, openvpn, p7zip, pango, patch, pcsc_lite, perl, pigz,
+                    png, polarssl_fedora, poppler, postgresql, ppp, privoxy,
+                    procps_ng, proftpd, pspp, pure_ftpd, putty, python, qt, quagga,
+                    radare2, radvd, rdesktop,rsync, rsyslog, rtl_433, rust, samba,
+                    sane_backends, seahorse, shadowsocks_libev, snort, sofia_sip,
+                    spice, sqlite, squashfs, squid, strongswan, stunnel, subversion,
+                    sudo, suricata, sylpheed, syslogng, sysstat systemd, tcpdump,
+                    thrift, thttpd, timescaledb, tinyproxy, tor, tpm2_tss,
+                    transmission, trousers, unbound, unixodbc, upx, util_linux,
+                    varnish, vsftpd, webkitgtk, wget, wireshark, wolfssl,
+                    wpa_supplicant, xerces, xml2, xscreensaver, zeek, zlib, znc, zsh
+                                                             <b class="conum">(2)</b>
+[16:45:51] INFO     cve_bin_tool -                                    cli.py:598
+           INFO     cve_bin_tool - Overall CVE summary:               cli.py:599
+           INFO     cve_bin_tool - There are 0 files with known CVEs  cli.py:605
+                    detected                                 <b class="conum">(3)</b></pre>
+</div>
+</div>
+<div class="colist arabic data-line-791">
+<ol>
+<li>
+<p>Number of vulnerabilities in database</p>
+</li>
+<li>
+<p>CVE Binary tool&#8217;s checkers</p>
+</li>
+<li>
+<p>Number of files with known CVEs</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-794">
+<p><em>As Anna started having a closer look at the output received from CVE binary tool which can also be seen in <a href="#Figure-nine">Figure 9.</a>, she realizes that the database which CVE binary tool is referring to has 189440 CVEs published with it, <a href="#Figure-nine">Figure 9. &lt;1&gt; </a>. In order to understand the data sources that CVE binary tool uses, Anna went back to the Intel CVE Binary tool&#8217;s Data Sources Github page<sup><a href="#reference-twenty-one">[21]</a></sup>, to study that the tool makes up its database from 4 sources i.e. NVD, Open Source Vulnerability Database (OSV), Gitlab Advisory Database (GAD), and RedHat Advisory Database (RSD).</em></p>
+</div>
+<div class="paragraph data-line-797">
+<p>One thing to note is that in <a href="#Figure-three">Figure 3.</a> the number of CVEs is 188,902 which was taken from CVEdetails.com<sup><a href="#reference-twenty-two">[22]</a></sup>; in the CVE binary&#8217;s output as can be seen in <a href="#Figure-nine">Figure 9. &lt;1&gt; </a>, the number of CVEs is 189,440; and the number of CVEs published according to MITRE CVE website<sup><a href="#reference-three">[3]</a></sup> is 192,255. All these numbers are different because it takes time for CNAs to report vulnerabilities and for other sources to be consistent with each other.</p>
+</div>
+<div class="admonitionblock note data-line-799">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The author suggests their readers to refer to NVD when dealing with CVEs as it is the most common database used by many vulnerability scanners and it also works in collaboration with MITRE Corporation.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-801">
+<p><em>Further, Anna realizes that there&#8217;s list of checkers at <a href="#Figure-nine">Figure 9. &lt;2&gt; </a> that CVE Binary tool follows, which can also be matched with the Intel CVE Binary Tool Binary Checker List Github page<sup><a href="#reference-twenty-three">[23]</a></sup>. Because of this, she realized that CVE binary tool only looks for vulnerable components aligning with their 243 checkers. This meant that CVE binary will not be able to look for vulnerabilities in the components which did not come in that category. She did see <strong>Libgcrypt</strong> as one of the checkers in the checkers list, which confirmed to her that this tool can be used for scanning her project. Finally, going further through the report, she observes that the CVE binary tool reported 0 files with known CVEs which can be found in <a href="#Figure-nine">Figure 9. &lt;3&gt; </a>. This revelation surprised Anna because according to her previous encounter with OWASP dependency-check, the tool had identified 4 vulnerabilities as can be witnessed in <a href="#Figure-five">Figure 5. &lt;3&gt; </a>. Of course, <a href="#Figure-eight">Figure 8. &lt;4&gt; </a> proves that she suppressed the vulnerabilities but these vulnerabilities were only suppressed from the dependency-check&#8217;s perspective. Those vulnerabilties still existed in her project, they weren&#8217;t just being reported by dependency-check tool. Because of which she anticipated that the CVE Binary tool would pick up on those vulnerabilties again. Remembering the checkers list in <a href="#Figure-nine">Figure 9. &lt;2&gt; </a> and Intel CVE Binary Tool Binary Checker List Github page<sup><a href="#reference-twenty-three">[23]</a></sup>, she apprehended that jQuery is not a part of it, which is why those 4 vulnerabilities are not being report via CVE Binary tool.</em></p>
+</div>
+<div class="paragraph data-line-803">
+<p><em>She downloads Node Package Manager (npm) which is a package manager specifically used for JavaScript application for Node.js which&#8217;ll offer the required JavaScript server environment which Anna needs for her project. Now, Anna proceeds to transferring the <strong>Libgcrypt</strong> library by GnuPG, which she had downloaded a few months ago from her another project to her current project. Once she settled her project into the npm environment with her <strong>Libgcrypt library</strong> can be seen in Anna&#8217;s GitHub Repository<sup><a href="#reference-fourteen">[14]</a></sup>, she realizes that a new file has been added to her project by npm which is <strong>package-lock.json</strong>. This file has been depicted in <a href="#Figure-ten">Figure 10.</a> given below.</em></p>
+</div>
+<div class="exampleblock data-line-806">
+<div class="content">
+<div id="Figure-ten" class="paragraph data-line-808">
+<p>Figure 10. Initial Package-lock.json</p>
+</div>
+<div class="literalblock data-line-809">
+<div class="content">
+<pre>{
+    "name": "libgcrypt",                                     <b class="conum">(1)</b>
+    "version": "1.8.4",                                      <b class="conum">(2)</b>
+    "dependencies": {
+    }
+}</pre>
+</div>
+</div>
+<div class="colist arabic data-line-818">
+<ol>
+<li>
+<p>Name of the package</p>
+</li>
+<li>
+<p>Version of the package</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-822">
+<p><em>According to <a href="#Figure-ten">Figure 10. &lt;1&gt; </a> and <a href="#Figure-ten">Figure 10. &lt;2&gt; </a>, the package which has been identified by npm, existing in the current project is <strong>libgcrypt</strong> and the version of that package is <strong>1.8.4</strong>. Anna understood that <strong>package-lock.json</strong> was the file used by npm to keep track of dependencies related to the same. Addition of a package manager and new files in her project triggered Anna to run the CVE binary tool again which gave the following outcome as can be seen in <a href="#Figure-eleven">Figure 11.</a></em></p>
+</div>
+<div class="exampleblock data-line-825">
+<div class="content">
+<div id="Figure-eleven" class="paragraph data-line-827">
+<p>Figure 11. CVE Binary Tool&#8217;s Outcome of Anna&#8217;s Project with Libgcrypt</p>
+</div>
+<div class="literalblock data-line-828">
+<div class="content">
+<pre>[16:45:47] INFO     xmlschema - Resource 'XMLSchema.xsd' is      schemas.py:1221
+                    already loaded
+           INFO     cve_bin_tool - CVE Binary Tool v3.1.1             cli.py:365
+           INFO     cve_bin_tool - This product uses the NVD API but  cli.py:366
+                    is not endorsed or certified by the NVD.
+           INFO     cve_bin_tool - Not using an NVD API key. Your     cli.py:380
+                    access may be rate limited by NVD.
+           INFO     cve_bin_tool - Get an NVD API key here: https://n cli.py:381
+                    vd.nist.gov/developers/request-an-api-key
+           WARNING  cve_bin_tool -                                    cli.py:393
+                                              ***********************
+                    ***********************
+                                              Warning: this utility
+                    was developed for Linux.
+                                              You may need to install
+                    additional utilities
+                                              to use it on other
+                    operating systems.
+                                              ***********************
+                    ***********************
+
+           INFO     cve_bin_tool.CVEDB - Using cached CVE data      cvedb.py:351
+                    (&lt;24h old). Use -u now to update immediately.
+           INFO     cve_bin_tool.CVEDB - There are 189440 CVE       cvedb.py:381
+                    entries in the database
+           INFO     cve_bin_tool - CVE database last updated on 26    cli.py:492
+                    November 2022 at 22:42:44
+           INFO     cve_bin_tool - Number of checkers: 243            cli.py:567
+           INFO     cve_bin_tool.VersionScanner -         version_scanner.py:105
+                    Checkers: accountsservice, acpid, apache_http_server,
+                    apcupsd, asn1c, assimp, asterisk, atftp, avahi, bash, bind,
+                    binutils, bird, bison, boinc, bolt, bro, bubblewrap, busybox,
+                    bzip2, c_ares, chess, chrony, clamav, collectd,
+                    commons_compress, connman, cronie, cryptsetup, cups, curl,
+                    cvs, darkhttpd, davfs2, dbus, dhcpcd, dnsmasq, domoticz,
+                    dovecot, dpkg, e2fsprogs, elfutils, enscript, exim, exiv2,
+                    expat, fastd, ffmpeg, freeradius, file, firefox, freeradius,
+                    freerdp, fribidi, ftp, gcc, gdb, gimp, git, glib, glibc, gmp,
+                    gnomeshell, gnupg, gnutls, gpgme, gpsd, graphicsmagick, grub2,
+                    gstreamer, gupnp, gvfs, haproxy, haserl, hdf5, hostapd,
+                    hunspell, i2pd, icecast, icu, iperf3, ipsec_tools, iptables,
+                    irssi, iucode_tool, jack2, jacksondatabind, janus, jhead,
+                    json_c, kbd, keepalived, kerberos,   kexectools, lftp,
+                    libarchive, libbpg, libconfuse, libdb, libebml, libgcrypt,
+                    libgit2, libical, libinput, libjpeg, libjpeg_turbo, libksba,
+                    liblas, libnss, libpcap, librsvg, librsync, libsamplerate,
+                    libseccomp, libsndfile, libsolv, libsoup, libsrtp, libssh,
+                    libssh2, libtiff, libtomcrypt, libupnp, libvirt, libvncserver,
+                    libvorbis, libxslt, lighttpd, ldpd, logrotate, lua, luajit,
+                    lynx, lz4, mailx, mariadb, mdadm, memcached, minicom, minidlna,
+                    miniupnpc, miniupnpd mosquitto, motion, mpv, mtr, mutt, mysql,
+                    nano, nbd, ncurses, neon, nessus, netatalk, netpbm, nettle,
+                    nghttp2, nginx, nmap, node, ntp, ntpsec, open_vm_tools,
+                    openafs, opencv, openjpeg, openldap, openssh, openssl,
+                    openswan, openvpn, p7zip, pango, patch, pcsc_lite, perl, pigz,
+                    png, polarssl_fedora, poppler, postgresql, ppp, privoxy,
+                    procps_ng, proftpd, pspp, pure_ftpd, putty, python, qt, quagga,
+                    radare2, radvd, rdesktop,rsync, rsyslog, rtl_433, rust, samba,
+                    sane_backends, seahorse, shadowsocks_libev, snort, sofia_sip,
+                    spice, sqlite, squashfs, squid, strongswan, stunnel, subversion,
+                    sudo, suricata, sylpheed, syslogng, sysstat systemd, tcpdump,
+                    thrift, thttpd, timescaledb, tinyproxy, tor, tpm2_tss,
+                    transmission, trousers, unbound, unixodbc, upx, util_linux,
+                    varnish, vsftpd, webkitgtk, wget, wireshark, wolfssl,
+                    wpa_supplicant, xerces, xml2, xscreensaver, zeek, zlib, znc, zsh
+
+
+[00:37:31] INFO     cve_bin_tool.CVEScanner - 3 CVE(s) in     cve_scanner.py:222
+                    gnupg.libgcrypt v1.8.4                   <b class="conum">(1)</b>
+[00:37:39] INFO     cve_bin_tool -                                    cli.py:598
+           INFO     cve_bin_tool - Overall CVE summary:               cli.py:599
+           INFO     cve_bin_tool - There are 1 files with known CVEs  cli.py:605
+                    detected                                 <b class="conum">(2)</b>
+           INFO     cve_bin_tool - Known CVEs in ('libgcrypt',        cli.py:615
+                    '1.8.4'):
+
+
+                                CVE BINARY TOOL version: 3.1.1
+
+
+ • Report Generated: 2022-11-28  00:37:39
+ • Time of last update of CVE Data: 2022-11-27  23:06:33
+╭─────────────╮
+│ CVE SUMMARY │
+╰─────────────╯
+┏━━━━━━━━━━┳━━━━━━━┓
+┃ Severity ┃ Count ┃
+┡━━━━━━━━━━╇━━━━━━━┩
+│ CRITICAL │ 0     │
+│ HIGH     │ 1     │
+│ MEDIUM   │ 2     │
+│ LOW      │ 0     │
+└──────────┴───────┘
+╭─────────────────╮
+│  NewFound CVEs  │
+╰─────────────────╯
+┏━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Vendor ┃ Product   ┃ Version ┃ CVE Number     ┃ Severity ┃ Score (CVSS Version) ┃
+┡━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
+│ gnupg  │ libgcrypt │ 1.8.4   │ CVE-2019-12904 │ MEDIUM   │ 5.9 (v3)             │     <b class="conum">(3)</b>
+│ gnupg  │ libgcrypt │ 1.8.4   │ CVE-2021-33560 │ HIGH     │ 7.5 (v3)             │     <b class="conum">(3)</b>
+│ gnupg  │ libgcrypt │ 1.8.4   │ CVE-2021-40528 │ MEDIUM   │ 5.9 (v3)             │     <b class="conum">(3)</b>
+└────────┴───────────┴─────────┴────────────────┴──────────┴──────────────────────┘</pre>
+</div>
+</div>
+<div class="colist arabic data-line-947">
+<ol>
+<li>
+<p>Number of CVEs identified</p>
+</li>
+<li>
+<p>Number of files with known CVEs</p>
+</li>
+<li>
+<p>CVEs Identified</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-950">
+<p><em>Now looking at the new outcome produced by CVE Binary Tool, Anna realizes that including Libgcrypt in her project has made it vulnerable due to 3 CVEs reported by the tool. This can be seen in <a href="#Figure-eleven">Figure 11. &lt;1&gt; </a>. <a href="#Figure-eleven">Figure 11. &lt;2&gt; </a> shows that only one of the files in her project is causing these CVEs to be reported. Going further in the outcome, Anna discerns the CVE Ids of the vulnerabilities identified and their CVSS scores as described in <a href="#Figure-eleven">Figure 11. &lt;3&gt; </a>. To know more about these vulnerabilities, Anna had a look at these CVE entries at the NVD i.e. CVE-2019-12904<sup><a href="#reference-twenty-four">[24]</a></sup>, CVE-2021-33560<sup><a href="#reference-twenty-five">[25]</a></sup>, CVE-2021-40528<sup><a href="#reference-twenty-six">[26]</a></sup>. After going through their descriptions at the above mentioned NVD webpages, Anna comprehended that these CVE IDs didn&#8217;t have a direct relation to her project objectives. Anna was mostly planning on using ECDSA of <strong>Libgcrypt</strong> and CVE-2019-12904 mentioned that the AES implementation by the said library is vulnerable. Moreover, CVE-2021-33560 and CVE-2021-40528 identified that ElGamal implementation offered by <strong>Libgcrypt</strong> is broken, which was again irrelevant to her project. However, she is aware that ECDSA is based on Elgamal signature scheme so even though these vulnerabilities didn&#8217;t directly relate to her project, she didn&#8217;t want to take chances with the <strong>Libgcrypt&#8217;s</strong> ECDSA  implementation.</em></p>
+</div>
+<div class="paragraph data-line-952">
+<p><em>Anna wanted to handle these vulnerabilities rather than just ignoring them as this is a library that Anna has previously used. She chose to update this library to its latest version. She discarded the <strong>libgcrypt-1.8.4</strong> folder and downloaded the current stable version of Libcrypt which was <strong>1.10.1</strong>. She also changed the dependencies accordingly in <strong>package-lock.json</strong> as can be seen in <a href="#Figure-twelve">Figure 12. &lt;1&gt; </a></em></p>
+</div>
+<div class="exampleblock data-line-954">
+<div class="content">
+<div id="Figure-twelve" class="paragraph data-line-956">
+<p>Figure 12. New Package-lock.json</p>
+</div>
+<div class="literalblock data-line-957">
+<div class="content">
+<pre>{
+    "name": "libgcrypt",
+    "version": "1.10.1",                                     <b class="conum">(1)</b>
+    "dependencies": {
+    }
+}</pre>
+</div>
+</div>
+<div class="colist arabic data-line-965">
+<ol>
+<li>
+<p>Version of the package</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-968">
+<p><em>Anna reran the CVE Binary tool after updating *Libgcrypt *to a newer version, of which she got an outcome as can be seen in <a href="#Figure-thirteen">Figure 13.</a>. <a href="#Figure-thirteen">Figure 13. &lt;1&gt; </a> exhibits that there are 0 files with known vulnerabilities in them which means that the current version of Libgcrypt doesn&#8217;t have any vulnerabilities.</em></p>
+</div>
+<div class="exampleblock data-line-970">
+<div class="content">
+<div id="Figure-thirteen" class="paragraph data-line-972">
+<p>Figure 13. CVE Binary Tool Outcome of Anna&#8217;s Project with updated Libgcrypt</p>
+</div>
+<div class="literalblock data-line-973">
+<div class="content">
+<pre>[16:45:47] INFO     xmlschema - Resource 'XMLSchema.xsd' is      schemas.py:1221
+                    already loaded
+           INFO     cve_bin_tool - CVE Binary Tool v3.1.1             cli.py:365
+           INFO     cve_bin_tool - This product uses the NVD API but  cli.py:366
+                    is not endorsed or certified by the NVD.
+           INFO     cve_bin_tool - Not using an NVD API key. Your     cli.py:380
+                    access may be rate limited by NVD.
+           INFO     cve_bin_tool - Get an NVD API key here: https://n cli.py:381
+                    vd.nist.gov/developers/request-an-api-key
+           WARNING  cve_bin_tool -                                    cli.py:393
+                                              ***********************
+                    ***********************
+                                              Warning: this utility
+                    was developed for Linux.
+                                              You may need to install
+                    additional utilities
+                                              to use it on other
+                    operating systems.
+                                              ***********************
+                    ***********************
+
+           INFO     cve_bin_tool.CVEDB - Using cached CVE data      cvedb.py:351
+                    (&lt;24h old). Use -u now to update immediately.
+           INFO     cve_bin_tool.CVEDB - There are 189440 CVE       cvedb.py:381
+                    entries in the database
+           INFO     cve_bin_tool - CVE database last updated on 26    cli.py:492
+                    November 2022 at 22:42:44
+           INFO     cve_bin_tool - Number of checkers: 243            cli.py:567
+           INFO     cve_bin_tool.VersionScanner -         version_scanner.py:105
+                    Checkers: accountsservice, acpid, apache_http_server,
+                    apcupsd, asn1c, assimp, asterisk, atftp, avahi, bash, bind,
+                    binutils, bird, bison, boinc, bolt, bro, bubblewrap, busybox,
+                    bzip2, c_ares, chess, chrony, clamav, collectd,
+                    commons_compress, connman, cronie, cryptsetup, cups, curl,
+                    cvs, darkhttpd, davfs2, dbus, dhcpcd, dnsmasq, domoticz,
+                    dovecot, dpkg, e2fsprogs, elfutils, enscript, exim, exiv2,
+                    expat, fastd, ffmpeg, freeradius, file, firefox, freeradius,
+                    freerdp, fribidi, ftp, gcc, gdb, gimp, git, glib, glibc, gmp,
+                    gnomeshell, gnupg, gnutls, gpgme, gpsd, graphicsmagick, grub2,
+                    gstreamer, gupnp, gvfs, haproxy, haserl, hdf5, hostapd,
+                    hunspell, i2pd, icecast, icu, iperf3, ipsec_tools, iptables,
+                    irssi, iucode_tool, jack2, jacksondatabind, janus, jhead,
+                    json_c, kbd, keepalived, kerberos,   kexectools, lftp,
+                    libarchive, libbpg, libconfuse, libdb, libebml, libgcrypt,
+                    libgit2, libical, libinput, libjpeg, libjpeg_turbo, libksba,
+                    liblas, libnss, libpcap, librsvg, librsync, libsamplerate,
+                    libseccomp, libsndfile, libsolv, libsoup, libsrtp, libssh,
+                    libssh2, libtiff, libtomcrypt, libupnp, libvirt, libvncserver,
+                    libvorbis, libxslt, lighttpd, ldpd, logrotate, lua, luajit,
+                    lynx, lz4, mailx, mariadb, mdadm, memcached, minicom, minidlna,
+                    miniupnpc, miniupnpd mosquitto, motion, mpv, mtr, mutt, mysql,
+                    nano, nbd, ncurses, neon, nessus, netatalk, netpbm, nettle,
+                    nghttp2, nginx, nmap, node, ntp, ntpsec, open_vm_tools,
+                    openafs, opencv, openjpeg, openldap, openssh, openssl,
+                    openswan, openvpn, p7zip, pango, patch, pcsc_lite, perl, pigz,
+                    png, polarssl_fedora, poppler, postgresql, ppp, privoxy,
+                    procps_ng, proftpd, pspp, pure_ftpd, putty, python, qt, quagga,
+                    radare2, radvd, rdesktop,rsync, rsyslog, rtl_433, rust, samba,
+                    sane_backends, seahorse, shadowsocks_libev, snort, sofia_sip,
+                    spice, sqlite, squashfs, squid, strongswan, stunnel, subversion,
+                    sudo, suricata, sylpheed, syslogng, sysstat systemd, tcpdump,
+                    thrift, thttpd, timescaledb, tinyproxy, tor, tpm2_tss,
+                    transmission, trousers, unbound, unixodbc, upx, util_linux,
+                    varnish, vsftpd, webkitgtk, wget, wireshark, wolfssl,
+                    wpa_supplicant, xerces, xml2, xscreensaver, zeek, zlib, znc, zsh
+
+[16:45:51] INFO     cve_bin_tool -                                    cli.py:598
+           INFO     cve_bin_tool - Overall CVE summary:               cli.py:599
+           INFO     cve_bin_tool - There are 0 files with known CVEs  cli.py:605
+                    detected                                 <b class="conum">(1)</b></pre>
+</div>
+</div>
+<div class="colist arabic data-line-1052">
+<ol>
+<li>
+<p>Number of files with known CVEs</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1055">
+<p>Intel CVE binary tool turns out to be a very helpful tool when it comes to identifying open-source components. Even though the number of checkers are low i.e. 243 in comparison to actual number of open source components out there, but it is a highly updated binary scanner. The author can say this because, she has herself observed the number of checkers increase from 114 to 243 within a span of 8 months. Moreover, this tool can also turn out to be helpful for those softwares which are in the development phase. CVE Binary Tool can be included in a Continuous Integration/Continuous Deployment (CI/CD) pipeline through GitHub actions as well. Additionally, this tool makes use of multiple databases as its source for CVE entries which is why the author suggests to have an Internet Connection while running this tool even if it can function without it.</p>
+</div>
+</div>
+</div>
+<div class="sect1 data-line-1057">
+<h2 id="_codeql">Chapter 4. CodeQL</h2>
+<div class="sectionbody">
+<div class="paragraph data-line-1059">
+<p>The tools mentioned before will definitely help a beginner software engineer in upping their game in development when it comes to handling vulnerabilities inherited via upstream components. But what to do when the weaknesses behind such vulnerabilities are induced in the code written by the developers themselves i.e. if vulnerabilities are generated in the house? A CVE when gets published is tied to a software configuration or a product. Although the CVE gets published in a public database, it is possible for a developer to imitate a variant of that vulnerability in a software written by them. In such cases, it is much more important to understand the cause and effect of a vulnerability, rather than just identifying them according to their underlying CPEs and CVEs, etc. If shortly put, this means that the developers need to understand the semantics of their code and analyze them.</p>
+</div>
+<div class="paragraph data-line-1061">
+<p>CodeQL semantic analysis engine is a suitable solution for the above mentioned problem. This engine converts a piece of code into a queryable database which is in the form of a hierarchical representation such as an abstract syntax tree and a data flow graph. CodeQL works as a supercharged grep which allows its users to extract variants of vulnerabilities through CodeQL query language which is more like a complex SQL-like syntax.</p>
+</div>
+<div class="paragraph data-line-1063">
+<p>The author chose this engine for semantic analysis because author believes that it is very powerful when it comes to taint tracking and data flow within a code base. Moreover, this is a GitHub issued engine which can be integrated along with GitHub workflow. Thirdly, if integrated successfully, GitHub itself scans the repository everyday using default CodeQL queries created by GitHub itself. Finally, it is a free and open-source engine which is suitable for beginning software engineering developers. Now let&#8217;s learn about the engine through Anna&#8217;s perspective.</p>
+</div>
+<div class="paragraph data-line-1065">
+<p><em>After coming across 2 new tools which Anna believed would help her make her project free of vulnerabilities, especially from upstream components, she was ready to continue working on her own code for the project. As Anna was planning to create her own variant of ECDSA, she felt that she did not have to worry about vulnerabilities at this point. She divided her ECDSA variant in three parts which were key generation, ECDSA signing, and ECDSA verification. All of these parts belonged to different files and the data from one component was transferred to another.</em></p>
+</div>
+<div class="admonitionblock note data-line-1067">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The author will mainly be focusing on the ECDSA verification part because it is where CodeQL is demonstrated which is why the other two parts are missing from Anna&#8217;s GitHub Repository<sup><a href="#reference-fourteen">[14]</a></sup>. As the author previously mentioned at the Introduction&#8217;s <a href="#Caution">Caution</a>, this guide will only focus on the project components required to follow through the self-help guide.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-1070">
+<p><em>Anna had recently read about a code analysis engine named CodeQL which helps to extract variations of vulnerabilities. To understand more about what that meant, she studies more about the engine through CodeQL&#8217;s Setting up in Visual Studio Code GitHub Documentation<sup><a href="#reference-twenty-seven">[27]</a></sup>. She didn&#8217;t know whether she would require the engine or not, yet she went ahead and installed the CodeQL&#8217;s extension for Visual Studio Code as can be seen in <a href="#Figure-fourteen">Figure 14.</a> and set up a starter workspace with the help of CodeQL GitHub vscode-codeql-starter repository<sup><a href="#reference-twenty-eight">[28]</a></sup>. This can be seen in <a href="#Figure-fifteen">Figure 15.</a> as well.</em></p>
+</div>
+<div id="Figure-fourteen" class="paragraph data-line-1075">
+<p>Figure 14. CodeQL extension for Visual Studio Code</p>
+</div>
+<div class="imageblock data-line-1077">
+<div class="content">
+<img src="Pictures/CodeQLInstallation.png" alt="VSC extension for CodeQL" width="300" height="200">
+</div>
+</div>
+<div id="Figure-fifteen" class="paragraph data-line-1082">
+<p>Figure 15. Starter Workspace for CodeQL</p>
+</div>
+<div class="imageblock data-line-1084">
+<div class="content">
+<img src="Pictures/InitialWorkspace.png" alt="VSC extension for CodeQL">
+</div>
+</div>
+<div class="paragraph data-line-1088">
+<p><em>While going through this starter workspace, Anna notices a <strong>codeql-custom-queries-java</strong> folder which has a file named <strong>example.ql</strong>. The query enclosed in <strong>example.ql</strong>  can be seen in <a href="#Figure-sixteen">Figure 16.</a> While she notices this query she realizes that it has 4 parts, an import statement as can be seen in <a href="#Figure-sixteen">Figure 16. &lt;1&gt; </a>, a from statement as can be seen in <a href="#Figure-sixteen">Figure 16. &lt;2&gt; </a>, a where block as can be seen in <a href="#Figure-sixteen">Figure 16. &lt;3&gt; </a>, and a select statement as can be seen in <a href="#Figure-sixteen">Figure 16. &lt;4&gt; </a>. From the first look Anna discerns that this looks like a SQL syntax and is trying to find an empty block. There were other folders similar to <strong>codeql-custom-queries-java</strong> but for other languages in the starter workspace which made it a little clear that all queries that she&#8217;ll be writing for her current project will be going in the <strong>codeql-custom-queries-java</strong> folder as most of her program is in Java. To understand more about writing queries and CodeQL, Anna hit CodeQL&#8217;s documentation.</em></p>
+</div>
+<div class="exampleblock data-line-1090">
+<div class="content">
+<div id="Figure-sixteen" class="paragraph data-line-1092">
+<p>Figure 16. Example CodeQL Query</p>
+</div>
+<div class="literalblock data-line-1093">
+<div class="content">
+<pre>import java                                                  <b class="conum">(1)</b>
+
+from BlockStmt b                                             <b class="conum">(2)</b>
+where b.getNumStmt() = 0                                     <b class="conum">(3)</b>
+select b, "This is an empty block."                          <b class="conum">(4)</b></pre>
+</div>
+</div>
+<div class="colist arabic data-line-1103">
+<ol>
+<li>
+<p>Import statement</p>
+</li>
+<li>
+<p>From statement</p>
+</li>
+<li>
+<p>Where block</p>
+</li>
+<li>
+<p>Select statement</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1106">
+<p><em>By going through the documentation of the tool more and more and also by having a look at <a href="#Figure-fourteen">Figure 14.</a>, she realized that she&#8217;ll have to create a database of her project folder so that she could query that database which can be witnessed in CodeQL&#8217;s Creating Databases GitHub Documentation<sup><a href="#reference-twenty-nine">[29]</a></sup>. As she was using Gradle to build her major portion of the project, the command which she used to create database for her project is given below.</em></p>
+</div>
+<div class="sidebarblock data-line-1108">
+<div class="content">
+<div class="paragraph data-line-1109">
+<p>$ codeql database create &lt;NameOfTheDatabase&gt; --language=java --command='gradle --no-daemon clean test'</p>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1112">
+<p><em>The above command led to creation of a database named &lt;NameOfTheDatabase&gt; which in Anna&#8217;s case is named <strong>codeqlDatabase</strong> as can be seen in Anna&#8217;s GitHub repository<sup><a href="#reference-fourteen">[14]</a></sup>. While she was focusing on her project and trying out CodeQL for studying purposes, she came across a new highly publicized vulnerability named Psychic Signatures in news. As she was trying to be more attentive towards vulnerabilities by inculcating awareness about them in her vulnerability management practice, she went and read about that vulnerability in the NVD website<sup><a href="#reference-thirty">[30]</a></sup> and in few other blogs<sup><a href="#reference-thirty-one">[31]</a></sup></em></p>
+</div>
+<div class="paragraph data-line-1114">
+<p>To give the readers a loose translation of what this vulnerability meant is that in the ECDSA signing part the algorithm results into a signature comprising of a pair of values i.e. (r, s). These values are compared to each other for equality after performing some complex operation on the <strong>s</strong> part of the signature. If any of these values is 0 then eventually after performing those complex operations, the equality comparison between them checks, as both the values become 0 after that, and 0 == 0 is always true. This is why the signature will always be considered valid because it becomes a psychic signature i.e. it basically exhibits the signature validity which the algorithm wants to see.</p>
+</div>
+<div class="paragraph data-line-1116">
+<p><em>After going through the vulnerability, Anna realized that even though Psychic Signatures wasn&#8217;t related to her project as the Oracle Java SE and Oracle Graal VM Enterprise Edition were affected by this broken implementation of Psychic Signatures, there is a possibility that a variant of this vulnerability might exist in her project. Partial code of the variant ECDSA verification can be seen below in <a href="#Figure-seventeen">Figure 17.</a></em></p>
+</div>
+<div class="exampleblock data-line-1119">
+<div class="content">
+<div id="Figure-seventeen" class="paragraph data-line-1121">
+<p>Figure 17. Partial code for ECDSA verification</p>
+</div>
+<div class="literalblock data-line-1122">
+<div class="content">
+<pre>public class PsychicECDSA {
+
+    static int modInverse(int A, int M)
+    {
+
+        for (int X = 1; X &lt; M; X++)
+            if (((A % M) * (X % M)) % M == 1)
+                return X;
+        return 1;
+    }
+
+    static boolean signVerify (int rSignature, int sSignature, int message, int order, Point G, Point pubKey) {                                              <b class="conum">(1)</b>
+        String s = null;
+        s = new String ("isValid");
+        Boolean validity = true;
+
+        int s1 = (modInverse (sSignature, order)) % order;
+        Point R = new Point();
+        pubKey.setLocation(pubKey.getX() * rSignature * s1, pubKey.getY() * rSignature * s1);
+        G.setLocation(G.getX() * message * s1, G.getY() * message * s1);
+        R.setLocation(pubKey.getX() + G.getX(), pubKey.getY() + G.getY());
+        if (R.getX() == rSignature) {                        <b class="conum">(2)</b>
+            System.out.println(s);
+        } else {
+            s = ("isNotValid")
+            System.out.println(s);
+            validity = false;
+        }
+        return validity;
+    }
+
+    public static void main (String[] args) {
+        Point Generator = null;
+        Generator = new Point (5998,7484);
+        Point PublicKey = null;
+        PublicKey = new Point(1824,7799);
+        signVerify(0, 0, 7564, 6863, Generator, PublicKey);  <b class="conum">(3)</b>
+
+    }
+}</pre>
+</div>
+</div>
+<div class="colist arabic data-line-1167">
+<ol>
+<li>
+<p>Parameters of the signVerify method</p>
+</li>
+<li>
+<p>Signature validity condition</p>
+</li>
+<li>
+<p>Method invocation for signVerify</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="admonitionblock note data-line-1170">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The author understands that the reader might or might not be familiar with ECDSA and Java, so the author suggests their readers to read through the rest of the explanation provided through callouts in this section to understand the above piece of code. If the readers wish then they can go through the code.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-1173">
+<p><em>Anna noted that even though her Key Generation and ECDSA signing part were variable than original ECDSA, her ECDSA verification was kind of similar which meant that a variant of this vulnerability could exist in her project. If one looks at <a href="#Figure-seventeen">Figure 17. &lt;1&gt; </a>, two of the parameters that Anna&#8217;s signVerify function is assuming are rSignature and sSignature which form the Signature pair. Once sSignature goes through complex operations in the signVerify function, a derivative of sSignature and rSignature are compared for equality which can be noticed at <a href="#Figure-seventeen">Figure 17. &lt;2&gt; </a> which if becomes true then the signature is considered valid. Anna wanted to check whether CodeQL could catch such a variant of Psychic Signatures due to which she started learning CodeQL syntax from CodeQL Java&#8217;s Standard Library GitHub Documentation<sup><a href="#reference-thirty-two">[32]</a></sup> and CodeQL query structure from CodeQL for Java and Kotlin GitHub Documentation<sup><a href="#reference-thirty-three">[33]</a></sup>. After learning the CodeQL syntax, Anna crafts a CodeQL query especially for the blank signature purpose as can be seen in <a href="#Figure-eighteen">Figure 18.</a>.</em></p>
+</div>
+<div class="exampleblock data-line-1176">
+<div class="content">
+<div id="Figure-eighteen" class="paragraph data-line-1178">
+<p>Figure 18. Anna&#8217;s Partial CodeQL query for Blank Signatures</p>
+</div>
+<div class="literalblock data-line-1179">
+<div class="content">
+<pre>import java                                                  <b class="conum">(1)</b>
+import semmle.code.java.Expr                                 <b class="conum">(2)</b>
+
+
+from Method m, MethodAccess ma, int a, int b                 <b class="conum">(3)</b>
+
+where                                                        <b class="conum">(4)</b>
+  m.getName().matches("signVerify") and                      <b class="conum">(5)</b>
+  ma.getMethod() = m and                                     <b class="conum">(6)</b>
+  a = ma.getArgument(0).(IntegerLiteral).getIntValue() and   <b class="conum">(7)</b>
+  b = ma.getArgument(1).(IntegerLiteral).getIntValue()       <b class="conum">(8)</b>
+
+select a, b, ma                                              <b class="conum">(9)</b></pre>
+</div>
+</div>
+<div class="colist arabic data-line-1202">
+<ol>
+<li>
+<p>Import statement for Java CodeQL library</p>
+</li>
+<li>
+<p>Import path for Expr module</p>
+</li>
+<li>
+<p>Variable declaration using from statement</p>
+</li>
+<li>
+<p>Where logical block</p>
+</li>
+<li>
+<p>Identification of method named signVerify</p>
+</li>
+<li>
+<p>Identification of method invocation for signVerify</p>
+</li>
+<li>
+<p>Extraction of first argument of signVerify method invocation</p>
+</li>
+<li>
+<p>Extraction of second argument of signVerify method invocation</p>
+</li>
+<li>
+<p>Selected data to be displayed from the database</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1206">
+<p><em>While crafting this CodeQL query, Anna made sure that she was following the basic CodeQL query structure by referring to the About CodeQL Queries GitHub Documentation<sup><a href="#reference-thirty-four">[34]</a></sup>. According to that, she included import statements for CodeQL libraries and modules in <a href="#Figure-eighteen">Figure 18. &lt;1&gt; </a> and <a href="#Figure-eighteen">Figure 18. &lt;2&gt; </a> where <strong>java</strong> is a CodeQL and <strong>semmle.code.java.Expr</strong> is a import path for module Expr which stands for Expressions. This module can be witnessed at Module Expr CodeQL GitHub Documentation<sup><a href="#reference-thirty-five">[35]</a></sup>. Continuing with the query, Anna also included a <strong>from</strong> section in <a href="#Figure-eighteen">Figure 18. &lt;3&gt; </a> which is used for variable declarations. Here a <strong>Method</strong> with variable <strong>m</strong> and <strong>MethodAccess</strong> with variable name <strong>ma</strong> have been declared. Difference between the <strong>Method</strong> as can be referred from Class Method CodeQL GitHub Documentation<sup><a href="#reference-thirty-six">[36]</a></sup> and <strong>MethodAccess</strong> which can be referred from Class MethodAccess CodeQL GitHub Documentation<sup><a href="#reference-thirty-six">[36]</a></sup> is that <strong>Method</strong> is the callable where it is defined and <strong>MethodAccess</strong> is an invocation where the <strong>Methods</strong> are called. While she further carried on she came across, a <strong>where</strong> section in <a href="#Figure-eighteen">Figure 18. &lt;4&gt; </a> which includes all the logical statements to narrow down the outcomes. In <a href="#Figure-eighteen">Figure 18. &lt;5&gt; </a> she first attempts to get names of all the methods using the <strong>getName()</strong> predicate which returns a string value. This value is further narrowed down by selecting the methods whose name match with <strong>signVerify</strong> so <a href="#Figure-eighteen">Figure 18. &lt;5&gt; </a> matches <a href="#Figure-seventeen">Figure 17. &lt;1&gt; </a>. <a href="#Figure-eighteen">Figure 18. &lt;6&gt; </a> tries to extract the <strong>MethodAccess</strong> of the <strong>Method</strong> which has <strong>signVerify</strong> as its name so <a href="#Figure-eighteen">Figure 18. &lt;6&gt; </a> matches <a href="#Figure-seventeen">Figure 17. &lt;3&gt; </a>.</em></p>
+</div>
+<div class="admonitionblock note data-line-1208">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The author has included the method invocation for signVerify <a href="#Figure-seventeen">Figure 17. &lt;3&gt; </a> in the ECDSA verification part for easy understanding of the readers. Currently the author has provided fixed arguments for this invocation by design so as to make it easier for readers to focus on CodeQL queries rather than on the actual ECDSA code. Ideally, this invocation would have been called from another class and the arguments provided to signVerify method would have been randomly selected in ECDSA.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph data-line-1210">
+<p><em>Now moving on to <a href="#Figure-eighteen">Figure 18. &lt;7&gt; </a>, the statement is trying to extract the first argument of the <strong>MethodAccess ma</strong> which is being casted to <strong>IntegerLiteral</strong> from <strong>Expr</strong> and finally its integer value is being returned using <strong>getIntValue()</strong>. This statement will match with the first argument of <strong>signVerify</strong> in <a href="#Figure-seventeen">Figure 17. &lt;3&gt; </a> which is supplied as 0. The exact drill is being carried out by <a href="#Figure-eighteen">Figure 18. &lt;8&gt; </a> but in this case it will match with the second argument of <strong>signVerify</strong> in <a href="#Figure-seventeen">Figure 17. &lt;3&gt; </a> which is again 0. Anna has deliberately set these values to 0 in order to check the function of her first CodeQL query. Finally, she chooses to select both the arguments identified in the above logical statements and the <strong>MethodAccess</strong> invocation to be given as an output in the <strong>select</strong> statement of <a href="#Figure-eighteen">Figure 18. &lt;9&gt; </a>. After running this query on the <strong>codeqlDatabase</strong> Anna gets the following result as can be seen in <a href="#Figure-nineteen">Figure 19.</a></em></p>
+</div>
+<div id="Figure-nineteen" class="paragraph data-line-1213">
+<p>Figure 19. Blank Signatures Query Result</p>
+</div>
+<div class="imageblock data-line-1215">
+<div class="content">
+<img src="Pictures/QueryResult.png" alt="Query Result">
+</div>
+</div>
+<div class="paragraph data-line-1218">
+<p><em>The <strong>select</strong> statement in the <a href="#Figure-eighteen">Figure 18. &lt;9&gt; </a> has extracted the values if <strong>a</strong>, <strong>b</strong>, <strong>ma</strong> which is 0, 0, signVerify() method call. Anna also observed that signVerify() <strong>MethodAccess</strong> in the query result is clickable which automatically took her back <a href="#Figure-seventeen">Figure 17. &lt;3&gt; </a> which is source of this Psychic Signatures variant.</em></p>
+</div>
+<div class="paragraph data-line-1220">
+<p>The above query will display values of <strong>a</strong> and <strong>b</strong> no matter what their values are. There are multiple ways to narrow down this vulnerability such as including an if statement enclosing <a href="#Figure-eighteen">Figure 18. &lt;7&gt; </a> and <a href="#Figure-eighteen">Figure 18. &lt;8&gt; </a> and comparing their integral values with 0 for equality. This change will only prompt results to display when <strong>a</strong> and <strong>b</strong> are 0 and won&#8217;t prompt on other values. Moreover, if the arguments passed to the <strong>signVerify</strong> invocation is being passed from other variables initialized before its invocation rather than being passed while invocation then the query will change automatically. Now let&#8217;s move on to a more complicated query and much more subtle weakness.</p>
+</div>
+<div class="paragraph data-line-1222">
+<p><em>Anna also wishes to scramble the message before signing and verifying it through ECDSA. For this she is using another piece of code which can be seen in <sup><a href="#reference-fourteen">[14]</a></sup> and also in <a href="#Figure-twenty">Figure 20.</a>. She plans on scrambling the message and then feeding it off to the ECDSA signing or verification part. Firstly, she is checking whether the message which she&#8217;ll be receiving is neither null nor is its length 0. She is checking this through the <strong>checkMessage()</strong> function as can be seen in <a href="#Figure-twenty">Figure 20. &lt;1&gt; </a>. While programming she performed a typo in the code where instead of using conditional AND, she accidentally used bitwise AND.</em></p>
+</div>
+<div class="exampleblock data-line-1225">
+<div class="content">
+<div id="Figure-twenty" class="paragraph data-line-1227">
+<p>Figure 20. Partial code for Message Scrambling</p>
+</div>
+<div class="literalblock data-line-1228">
+<div class="content">
+<pre>package com.github.marschall.psychicsignatures;
+
+
+class myThread implements Runnable{
+    public static Integer counter = 0;
+    public static char[] newArray;
+    public String message;
+    char[] stringArray = message.toCharArray();
+
+    public boolean checkMessage() {                          <b class="conum">(1)</b>
+		return message != null &amp; message.length() &gt; 0;       <b class="conum">(2)</b>
+	}
+
+    public void run() {
+        if (checkMessage()) {
+            for (int i = 0; i &lt; = stringArray.length; i++) {
+                if (i%2 == 0) {
+                    newArray[i+1] = stringArray[i];
+                    newArray[i] = 'a';
+                } else {
+                    newArray[i-1] = stringArray[i];
+                }
+            }
+        }
+
+    }
+}
+
+public class MessageScrambler {
+    public static void main(String[] args) {
+        for (int i = 1; i &lt; = 3; i++) {
+            new Thread(new myThread()).start();
+        }
+    }
+}</pre>
+</div>
+</div>
+<div class="colist arabic data-line-1268">
+<ol>
+<li>
+<p>checkMessage method declaration</p>
+</li>
+<li>
+<p>checkMessage method body</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1272">
+<p><em>Unaware of this typo, she was carrying on with her project when she came across CodeQL query Help GitHub documentation<sup><a href="#reference-thirty-eight">[38]</a></sup> which is a list of default queries created by CodeQL to find common bugs and their linked vulnerabilities. While she was going through the documentation, she came across one of the queries named Dangerous non-short-circuit logic which she found at Dangerous non-short-circuit logic CodeQL Documentation<sup><a href="#reference-thirty-nine">[39]</a></sup>. She realized that switching bitwise operators with conditional operators leads to weaknesses too such as CWE-691 Insufficient Control Flow Management as can be seen in the CWE Mitre Website<sup><a href="#reference-forty">[40]</a></sup>. She was sure she didn&#8217;t switch those two ANDs but to confirm this she still ran the query provided for CodeQL Dangerous non-short-circuit logic GitHub repository page<sup><a href="#reference-forty-one">[41]</a></sup> which can also be seen in <a href="#Figure-twenty-one">Figure 21.</a></em></p>
+</div>
+<div class="exampleblock data-line-1275">
+<div class="content">
+<div id="Figure-twenty-one" class="paragraph data-line-1277">
+<p>Figure 21. Partial CodeQL Query for Dangerous Non-Short-Circuit Logic</p>
+</div>
+<div class="literalblock data-line-1278">
+<div class="content">
+<pre>import java
+
+
+class DangerousExpression extends Expr {                       <b class="conum">(1)</b>
+  DangerousExpression() {                                      <b class="conum">(2)</b>
+    exists(Expr e |                                            <b class="conum">(3)</b>
+      this = e.getParent())                                    <b class="conum">(4)</b>
+  }
+}
+
+class NonShortCircuit extends BinaryExpr {                     <b class="conum">(5)</b>
+  NonShortCircuit() {                                          <b class="conum">(6)</b>
+    (
+      this instanceof AndBitwiseExpr or                        <b class="conum">(7)</b>
+      this instanceof OrBitwiseExpr                            <b class="conum">(8)</b>
+    ) and
+    this.getLeftOperand().getType().hasName("boolean") and     <b class="conum">(9)</b>
+    this.getRightOperand().getType().hasName("boolean") and    <b class="conum">(10)</b>
+    this.getRightOperand() instanceof DangerousExpression      <b class="conum">(11)</b>
+  }
+}
+
+from NonShortCircuit e                                         <b class="conum">(12)</b>
+select e, "Possibly dangerous use of non-short circuit logic." <b class="conum">(13)</b></pre>
+</div>
+</div>
+<div class="colist arabic data-line-1316">
+<ol>
+<li>
+<p>Class DangerousExpression declaration</p>
+</li>
+<li>
+<p>Constructor of class DangerousExpression</p>
+</li>
+<li>
+<p>First condition of exists</p>
+</li>
+<li>
+<p>Second condition of exists</p>
+</li>
+<li>
+<p>Class DangerousExpression declaration</p>
+</li>
+<li>
+<p>Constructor of class NotShortCircuit</p>
+</li>
+<li>
+<p>Checking for AndBitwiseExpr</p>
+</li>
+<li>
+<p>Checking for OrBitwiseExpr</p>
+</li>
+<li>
+<p>Checking if left side of expression resolves to boolean type</p>
+</li>
+<li>
+<p>Checking if right side of expression resolves to boolean type</p>
+</li>
+<li>
+<p>Checking if any one side of expression is an instance of DangerousExpression</p>
+</li>
+<li>
+<p>Variable declaration using from statement</p>
+</li>
+<li>
+<p>Selected data to be displayed from the database and message to be displayed</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1321">
+<p><em>Anna tried to grasp an understanding of what this query meant. Firstly, her eye went to <a href="#Figure-twenty-one">Figure 21. &lt;12&gt; </a> where only one variable was declared named <strong>e</strong> of type object named <strong>NonshortCircuit</strong>. She immediately looked at the defined class at <a href="#Figure-twenty-one">Figure 21. &lt;5&gt; </a> where she found that this class inherits <strong>BinaryExpr</strong> class which is a class that identifies binary operator expressions. Further, there is a constructor defined for the NonShortCircuit class at <a href="#Figure-twenty-one">Figure 21. &lt;6&gt; </a> under which reference variable <strong>this</strong> is checked whether it is an instance of <strong>AndBitwiseExpr</strong> or <strong>OrBitwiseExpr</strong> class. These are specialized binary operator expressions that consist bitwise AND or bitwise OR. Till this statement the query is trying to isolate all binary expressions consisting bitwise AND or bitwise OR. Now, Anna realizes that in <a href="#Figure-twenty-one">Figure 21. &lt;9&gt; </a> <strong>getLeftOperand()</strong> is used to return the left side expression of the bitwise AND or bitwise OR which is then used to retrieve the type of the expression such as primitive type of the expression through the getType() predicate. Finally once the type of left side expression is determined, hasName("boolean") predicate is used to check whether the left side of the the expression has resolved to a boolean primitive type. The exact same logic is used to for the right side expression of the bitwise AND or bitwise OR at <a href="#Figure-twenty-one">Figure 21. &lt;10&gt; </a>. As Anna scans the rest of the code she sees that the right side expression of the binary expression is used to check whether it an instance of <strong>DangerousExpression</strong> class which is defined at <a href="#Figure-twenty-one">Figure 21. &lt;1&gt; </a>.</em></p>
+</div>
+<div class="paragraph data-line-1323">
+<p><em>Further, she sees that the class <strong>DangerousExpression</strong> inherits the class <strong>Expr</strong> which is a super-class that represents all kinds of expressions. In the next line she finds the constructor of the <strong>DangerousExpression</strong> class being defined in <a href="#Figure-twenty-one">Figure 21. &lt;2&gt; </a>. Now, she witnesses two parts of an <strong>exists</strong> condition at <a href="#Figure-twenty-one">Figure 21. &lt;3&gt; </a> and <a href="#Figure-twenty-one">Figure 21. &lt;4&gt; </a> which are being used to check whether they resolve or not. The first part checks whether resolution of <strong>e</strong> as a type <strong>Expr</strong> class is possible or not which it is as it is a binary expression, a subclass of expression. The second part checks whether resolution of the reference variable <strong>this</strong> as a parent of <strong>e</strong> using the <strong>getParent()</strong> predicate is possible or not, which the object of Dangerous Expression is, hence it is possible. Both the statements are not false so they automatically prove that <strong>DangeorusExpression</strong> exists and the right side expression identified at <a href="#Figure-twenty-one">Figure 21. &lt;11&gt; </a> is an instance of it. At this point, Anna realized that <a href="#Figure-twenty-one">Figure 21. &lt;11&gt; </a> any side of the expression could&#8217;ve been chosen to check if it was an instance of <strong>DangerousExpression</strong>. Finally, <a href="#Figure-twenty-one">Figure 21. &lt;13&gt; </a> is used to highlight the expression which is being isolated through this query and it can be seen in <a href="#Figure-twenty-two">Figure 22. </a>.</em></p>
+</div>
+<div id="Figure-twenty-two" class="paragraph data-line-1327">
+<p>Figure 22. Dangerous Non-Short-Circuit Logic Query Result</p>
+</div>
+<div class="imageblock data-line-1329">
+<div class="content">
+<img src="Pictures/DangerousQuery.png" alt="Dangerous Query Result">
+</div>
+</div>
+<div class="paragraph data-line-1331">
+<p><strong>DangerousExpression</strong> is used so that better matching of <a href="#Figure-twenty">Figure 20. &lt;2&gt; </a> could be done via <a href="#Figure-twenty">Figure 20. &lt;1&gt; </a>. <a href="#Figure-twenty-one">Figure 20. &lt;4&gt; </a> was used to check the resolution of <strong>getParent()</strong> where the parent is <a href="#Figure-twenty">Figure 20. &lt;1&gt; </a>. If this short circuit logic wasn&#8217;t a part of <strong>checkMessage()</strong> then the <strong>DangerousExpressions</strong> class can be removed from the query to match the same statement. At this point it becomes essential to keep track of our own programming habits because this will lead to better data retrieval via queries.</p>
+</div>
+<div class="paragraph data-line-1334">
+<p>CodeQL gives the flexibility to programmers to query their source code converted database in multiple ways. This is a powerful tool when it comes tracing variable values throughout a source code. In the first example, the author deliberately made the values of arguments being passed as 0 so as to make it visible for the readers but in real code bases it becomes harder and harder to keep track of data which is being flowed amongst different sections. Moreover, CodeQL can also be integrated in CI workflows via GitHub actions. It performs automated code scanning of GitHub repositories using default query help which can be found in CodeQL query Help GitHub documentation<sup><a href="#reference-thirty-eight">[38]</a></sup>. CodeQL proves to be very powerful engine when it comes to understanding data flow in a source code. All it requires is its user to be adept in CodeQL query language.</p>
+</div>
+</div>
+</div>
+<div class="sect1 data-line-1337">
+<h2 id="_comby_tool">Chapter 5. Comby Tool</h2>
+<div class="sectionbody">
+<div class="paragraph data-line-1339">
+<p>The final tool which is being introduced by the author is Comby which is a synctactic search and replace tool. As discussed before CodeQL will help you understand the meaning of your code and let you query it as a database to get the hidden values. But how to deal with the cases where the flaw is occurring from the lexical syntax of the written code. Most of such errors are caught by the compiler which is good but what if few of those slip out of the compiler&#8217;s line of processing? At such instances comby can be used. Moreover, the author suggests using Comby when the reader wants to enhance their code structure changing practice.</p>
+</div>
+<div class="paragraph data-line-1341">
+<p>Author chose this tool because of its ability to mass replace matched syntax. Till now the author, hasn&#8217;t witnessed any other tool which can match syntaxes without the complication of Regular Expressions and which can replace all of them simultaneously even if the matched syntaxes are slightly variant. Moreover, the author believes that maintaining code hygiene plays a good amount of role in secure programming which Comby will provide. Finally, as said before, the author believes that open-source and free tools are preferred by many software beginning developers which is why Comby is a perfect package for them.</p>
+</div>
+<div class="paragraph data-line-1343">
+<p><em>Anna is continuing to deal with bugs and vulnerabilities as soon as she is encountering them but she wishes to enhance her programming practice and wants to preemptively discard any possibilities of vulnerabilities in her code or even bugs. She had recently came across multiple vulnerabilities who shared a similar weakness which CWE-476 i.e. Null Pointer Dereference. She went to the CWE Mitre Website<sup><a href="#reference-forty-two">[42]</a></sup> to learn more about it. Now being sure that her project didn&#8217;t encounter any such problem, Anna realized that her variable initialization practice always includes null as can be seen in <a href="#Figure-twenty-three">Figure 23. &lt;1&gt; </a>, <a href="#Figure-twenty-three">Figure 23. &lt;3&gt; </a>, and <a href="#Figure-twenty-three">Figure 23. &lt;5&gt; </a>. Even though she did practiced assigned values to those variables right after but she wanted to check if she wasn&#8217;t missing any of those instances.</em></p>
+</div>
+<div class="exampleblock data-line-1345">
+<div class="content">
+<div id="Figure-twenty-three" class="paragraph data-line-1347">
+<p>Figure 23. Partial code for ECDSA verification</p>
+</div>
+<div class="literalblock data-line-1348">
+<div class="content">
+<pre>public class PsychicECDSA {
+
+    static int modInverse(int A, int M)
+    {
+
+        for (int X = 1; X &lt; M; X++)
+            if (((A % M) * (X % M)) % M == 1)
+                return X;
+        return 1;
+    }
+
+    static boolean signVerify (int rSignature, int sSignature, int message, int order, Point G, Point pubKey) {
+        String s = null;                                     <b class="conum">(1)</b>
+        s = new String ("isValid");                          <b class="conum">(2)</b>
+        Boolean validity = true;
+
+        int s1 = (modInverse (sSignature, order)) % order;
+        Point R = new Point();
+        pubKey.setLocation(pubKey.getX() * rSignature * s1, pubKey.getY() * rSignature * s1);
+        G.setLocation(G.getX() * message * s1, G.getY() * message * s1);
+        R.setLocation(pubKey.getX() + G.getX(), pubKey.getY() + G.getY());
+        if (R.getX() == rSignature) {
+            System.out.println(s);
+        } else {
+            s = ("isNotValid")
+            System.out.println(s);
+            validity = false
+        }
+        return validity;
+    }
+
+    public static void main (String[] args) {
+        Point Generator = null;                              <b class="conum">(3)</b>
+        Generator = new Point (5998,7484);                   <b class="conum">(4)</b>
+        Point PublicKey = null;                              <b class="conum">(5)</b>
+        PublicKey = new Point(1824,7799);                    <b class="conum">(6)</b>
+        signVerify(0, 0, 7564, 6863, Generator, PublicKey);
+
+    }
+}</pre>
+</div>
+</div>
+<div class="colist arabic data-line-1396">
+<ol>
+<li>
+<p>String Initialization with null</p>
+</li>
+<li>
+<p>Value Assignment for the String</p>
+</li>
+<li>
+<p>Generator Point Initialization with null</p>
+</li>
+<li>
+<p>Value Assignment for the Generator Point</p>
+</li>
+<li>
+<p>PublicKey Point Initialization with null</p>
+</li>
+<li>
+<p>Value Assignment for the PublicKey Point</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1399">
+<p><em>To address that problem, Anna installs Comby from Comby&#8217;s website<sup><a href="#reference-forty-three">[43]</a></sup>. While going through Comby&#8217;s Basic Usage webpage <sup><a href="#reference-forty-four">[44]</a></sup>, Comby&#8217;s Syntax Reference webpage <sup><a href="#reference-forty-five">[45]</a></sup>, Comby&#8217;s Advanced Usage webpage <sup><a href="#reference-forty-six">[46]</a></sup>, she learnt enough to draft a usable match and rewrite template for Comby as can be seen in the command below</em></p>
+</div>
+<div class="sidebarblock data-line-1403">
+<div class="content">
+<div class="paragraph data-line-1404">
+<p>$ comby ':&#91;[type]&#93; :&#91;[var]&#93; = null; :&#91;[var]&#93; = new :&#91;[type]&#93; :&#91;value&#93;' ':&#91;[type]&#93; :&#91;[var]&#93; = new :&#91;[type]&#93; :&#91;value&#93;'</p>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1407">
+<p><em>While Anna crafted the above two templates i.e. match and rewrite template, she had to keep in habitual programming practice in mind. For example, in her match template which is <strong>:&#91;[type]&#93; :&#91;[var]&#93; = null; :&#91;[var]&#93; = new :&#91;[type]&#93; :&#91;value&#93;</strong> she defined the :&#91;[type]&#93; hole to match the class <strong>String</strong> and <strong>Point</strong> and :&#91;[var]&#93; to match the variables <strong>s</strong>, <strong>Generator</strong>, and <strong>PublicKey</strong>. :&#91;value&#93; matches <strong>("isValid")</strong>, <strong>("5998, 7484")</strong>, <strong>(1824,7799)</strong>. This template matches all of the lines marked in <a href="#Figure-twenty-three">Figure 23.</a>. Now the rewrite template which is :&#91;[type]&#93; :&#91;[var]&#93; = new :&#91;[type]&#93; :&#91;value&#93; deletes the highlighted parts as can be seen in <a href="#Figure-twenty-four">Figure 24.</a> as those were the parts which weren&#8217;t matched by the match template.</em></p>
+</div>
+<div id="Figure-twenty-four" class="paragraph data-line-1411">
+<p>Figure 24. Output of the Comby&#8217;s Match and Rewrite Template for Null Dereference</p>
+</div>
+<div class="imageblock data-line-1413">
+<div class="content">
+<img src="Pictures/CombyOutput.png" alt="Comby Output" width="700" height="900">
+</div>
+</div>
+<div class="paragraph data-line-1415">
+<p><em>Anna notices here that irrespective of the variable name or the class Comby uses a generic matcher to match patterns that fit the hole requirements. For eg: &#91;[var]&#93; and &#91;[type]&#93; only match alphanumeric characters which is why these matched to <strong>s</strong>, <strong>Generator</strong>, and <strong>PublicKey</strong> and to <strong>String</strong> and <strong>Point</strong> respectively. Moreover, :&#91;value&#93; matches to any character as long as it isn&#8217;t a newline which is why it matched to <strong>("isValid")</strong>, <strong>(5998,7484)</strong>, and <strong>(1824,7799)</strong>. Using the above templates changed Anna&#8217;s code in a fashion as can be seen <a href="#Figure-twenty-five">Figure 25. &lt;1&gt; </a>, <a href="#Figure-twenty-five">Figure 25. &lt;2&gt; </a>, <a href="#Figure-twenty-five">Figure 25. &lt;3&gt; </a></em></p>
+</div>
+<div class="exampleblock data-line-1418">
+<div class="content">
+<div id="Figure-twenty-five" class="paragraph data-line-1420">
+<p>Figure 25. Partial code for ECDSA verification</p>
+</div>
+<div class="literalblock data-line-1421">
+<div class="content">
+<pre>public class PsychicECDSA {
+
+    static int modInverse(int A, int M)
+    {
+
+        for (int X = 1; X &lt; M; X++)
+            if (((A % M) * (X % M)) % M == 1)
+                return X;
+        return 1;
+    }
+
+    static boolean signVerify (int rSignature, int sSignature, int message, int order, Point G, Point pubKey) {
+        String s = new String ("isValid");                   <b class="conum">(1)</b>
+        Boolean validity = true;
+
+        int s1 = (modInverse (sSignature, order)) % order;
+        Point R = new Point();
+        pubKey.setLocation(pubKey.getX() * rSignature * s1, pubKey.getY() * rSignature * s1);
+        G.setLocation(G.getX() * message * s1, G.getY() * message * s1);
+        R.setLocation(pubKey.getX() + G.getX(), pubKey.getY() + G.getY());
+        if (R.getX() == rSignature) {
+            System.out.println(s);
+        } else {
+            s = ("isNotValid")
+            System.out.println(s);
+            validity = false
+        }
+        return validity;
+    }
+
+    public static void main (String[] args) {
+        Point Generator = new Point (5998,7484);             <b class="conum">(2)</b>
+        Point PublicKey = new Point (1824,7799);             <b class="conum">(3)</b>
+        signVerify(0, 0, 7564, 6863, Generator, PublicKey);
+
+    }
+}</pre>
+</div>
+</div>
+<div class="colist arabic data-line-1463">
+<ol>
+<li>
+<p>Updated String Initialization</p>
+</li>
+<li>
+<p>Updated Generator Point Initialization</p>
+</li>
+<li>
+<p>Updated PublicKey Point Initialization</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1466">
+<p><em>After Anna sidetracked the Null example, she comes across another weakness which she found at the CWE Mitre Website<sup><a href="#reference-forty-seven">[47]</a></sup>. This time she found a CWE-193 Off-by-one Error. She remembers that this kind of bug can occur in  her code easily especially when looping through arrays. Some of the times she knows that she is prone to providing incorrect continuation condition in for loops which can lead to array out of index bounds error. In her previous partial code for message scrambling which can also be seen at <a href="#Figure-twenty-six">Figure 26.</a>. She knows that she has multiple for loops in her entire project which might have different initialization, termination, and updation parts and she&#8217;ll have to use rules in comby if she wants to narrow down these for loops according to her requirements. For example, in <a href="#Figure-twenty-six">Figure 26. &lt;1&gt; </a>, the loop&#8217;s termination part is <strong>i &lt; = stringArray.length</strong> which can lead to miscalculation when forming the new scrambled message. However, Anna doesn&#8217;t know about this bug in her code. She just suspects that it is possibility that she might be using wrong termination condition due in her for loops and to narrow them down she uses the below Comby command</em></p>
+</div>
+<div class="sidebarblock data-line-1468">
+<div class="content">
+<div class="paragraph data-line-1469">
+<p>$ comby 'for (:&#91;initial&#93;; :&#91;[var]&#93; &lt; = :&#91;[rest]&#93;)' '' -rule 'where : ' = new :&#91;[type]&#93; :&#91;value&#93;' ':&#91;initial&#93; == "int i = 0"' .java -match-only</p>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1472">
+<p><em>While Anna was creating the above template, for the match template i.e. <strong>for (:&#91;initial&#93;; :&#91;[var]&#93; &lt; = :&#91;[rest]&#93;)</strong>, she kept in mind that <strong>:&#91;initial&#93;</strong> will be representing the initalization part of her for loops, <strong>:&#91;[var]&#93;</strong> will be the variable which is used as reference in the for loop and <strong>:&#91;[rest]&#93;</strong> would mean the rest of the termination and updation part of the for loop. She was only interested in the for loops whose termination part consisted <strong>&lt; =</strong>. But she realized that there were some intentional <strong>&lt; =</strong> in the termination part of some of her for loops which she didn&#8217;t want to match. while is why she narrowed down her for loops using a rule <strong>:&#91;initial&#93; == "int i = 0"</strong> which would only match the for loops which have their initialization parts as <strong>int i = 0</strong>. Anna knows that in most of her for loops she uses <strong>i</strong> as the variable which is why she put the rule as <strong>int i = 0</strong>. Here, she chose 0 as the value because most of the arrays she loops through, have their initialization part as <strong>int i = 0</strong>. Also, as she only suspects that there might be some occurrences of the CWE-193 due to which she wants to skip the rewrite template which is why the rewrite template is <strong>''</strong> empty. Also, to mention the same, she is using -match-only option. Finally, in her last comby syntax she used a generic matcher for her command but this time she wishes to specify that this command is used for java files which is why she used the <strong>.java</strong> matcher.</em></p>
+</div>
+<div class="exampleblock data-line-1474">
+<div class="content">
+<div id="Figure-twenty-six" class="paragraph data-line-1476">
+<p>Figure 26. Partial code for Message Scrambling</p>
+</div>
+<div class="literalblock data-line-1477">
+<div class="content">
+<pre>package com.github.marschall.psychicsignatures;
+
+
+class myThread implements Runnable{
+    public static Integer counter = 0;
+    public static char[] newArray;
+    public String message;
+    char[] stringArray = message.toCharArray();
+
+    public boolean checkMessage() {
+		return message != null &amp; message.length() &gt; 0;
+	}
+
+    public void run() {
+        if (checkMessage()) {
+            for (int i = 0; i &lt; = stringArray.length; i++) {  <b class="conum">(1)</b>
+                if (i%2 == 0) {
+                    newArray[i+1] = stringArray[i];
+                    newArray[i] = 'a';
+                } else {
+                    newArray[i-1] = stringArray[i];
+                }
+            }
+        }
+
+    }
+}
+
+public class MessageScrambler {
+    public static void main(String[] args) {
+        for (int i = 1; i &lt; = 3; i++) {                       <b class="conum">(2)</b>
+            new Thread(new myThread()).start();
+        }
+    }
+}</pre>
+</div>
+</div>
+<div class="colist arabic data-line-1517">
+<ol>
+<li>
+<p>Buggy for loop</p>
+</li>
+<li>
+<p>Intentional for loop</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1520">
+<p><em>The command reproduced the following output as can be seen in <a href="#Figure-twenty-seven">Figure 27.</a>. It matched with <a href="#Figure-twenty-six">Figure 26. &lt;1&gt; </a>. If Anna hadn&#8217;t applied the rule in her comby command then <a href="#Figure-twenty-seven">Figure 26. &lt;2&gt; </a> would have matched as well. But as the <strong>&lt; =</strong> in <a href="#Figure-twenty-six">Figure 26. &lt;2&gt; </a> is intentional which is why the rule was applied.</em></p>
+</div>
+<div id="Figure-twenty-seven" class="paragraph data-line-1523">
+<p>Figure 27. Output of the Comby&#8217;s Match Template for Off-By-One Error</p>
+</div>
+<div class="imageblock data-line-1525">
+<div class="content">
+<img src="Pictures/CombyMatch.png" alt="CombyMatch" width="700" height="900">
+</div>
+</div>
+<div class="paragraph data-line-1528">
+<p><em>Now Anna sees that <strong>&lt; =</strong> <a href="#Figure-twenty-six">Figure 26. &lt;2&gt; </a> is an accidental syntax and needs to be changed <strong>&lt;</strong>, otherwise it&#8217;ll lead to Off-by-one error which is not intended. Hence she crafts a new command for comby to replace <strong>&lt; =</strong> with <strong>&lt;</strong>. This command can be seen below</em></p>
+</div>
+<div class="admonitionblock note data-line-1530">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+The path of the file have been obscured in the above image.
+</td>
+</tr>
+</table>
+</div>
+<div class="sidebarblock data-line-1533">
+<div class="content">
+<div class="paragraph data-line-1534">
+<p>$ comby 'for (:&#91;initial&#93;; :&#91;[var]&#93; &lt; = :&#91;[rest]&#93;)' 'for (:&#91;initial&#93;; :&#91;[var]&#93; &lt; :&#91;[rest]&#93;)' -rule 'where : ' = new :&#91;[type]&#93; :&#91;value&#93;' ':&#91;initial&#93; == "int i = 0"' .java</p>
+</div>
+</div>
+</div>
+<div class="paragraph data-line-1537">
+<p><em>Anna knew that most of the command will be same as the exact match template and the rule template will be used to isolate <a href="#Figure-twenty-six">Figure 26. &lt;2&gt; </a>. She&#8217;ll only have to remove the -match-only option and introduce the rewrite template which is <strong>for (:&#91;initial&#93;; :&#91;[var]&#93; &lt; :&#91;[rest]&#93;)</strong>. As can be seen from the template that <strong>&lt; =</strong> is being replaced with <strong>&lt;</strong> and this can also be confirmed from the output of this command can be seen in <a href="#Figure-twenty-eight">Figure 28.</a></em></p>
+</div>
+<div id="Figure-twenty-eight" class="paragraph data-line-1540">
+<p>Figure 28. Output of the Comby&#8217;s Match and Replace Template for Off-By-One Error</p>
+</div>
+<div class="imageblock data-line-1542">
+<div class="content">
+<img src="Pictures/CombyReplace.png" alt="CombyReplace" width="700" height="900">
+</div>
+</div>
+<div class="paragraph data-line-1544">
+<p>It becomes essential for one to understand and keep in mind their programming habits when it comes to using Comby because it matches the syntax exactly as it sees it. For example, in the above example, <strong>for (:&#91;initial&#93;; :&#91;[var]&#93; &lt; = :&#91;[rest]&#93;)</strong> and <strong>for(:&#91;initial&#93;; :&#91;[var]&#93; &lt; = :&#91;[rest]&#93;)</strong> will not match to the same line because there is a space in the former match template between the for part and brackets. Moreover, isolation of syntax completely depends on the requirements of a user. For example, there might be cases where the user wants to check for <strong>&gt; =</strong> and not <strong>&lt; =</strong>. The former can lead to an Off-By-One Error too. so it becomes important for the user to exhaust all cases to eradicate such bugs.</p>
+</div>
+<div class="paragraph data-line-1546">
+<p>Comby is a tool which can be specifically used to search and replace lexical syntax to enhance the grammar of a code base. Its matching pattern is much better than regular expressions because it disregards the unbalanced entities for example, if matching is done for a block of multiple lines one of the line includes unbalanced parentheses in a comment. Matching such a block becomes difficult with Regular Expressions but is eased by comby. Moreover, it also accommodates matching using Regular Expressions inside Comby holes to make searching and matching better for Comby. Another added advantage of this tool is mass replacement of syntaxes. Comby enables its users to generalize multiple similar syntaxes and replace them all together. If one needs to enhance their syntactic aspect of code bases in order to avoid any probable bugs then Comby is the tool for them.</p>
+</div>
+</div>
+</div>
+<div class="sect1 data-line-1553">
+<h2 id="_references">References</h2>
+<div class="sectionbody">
+<div class="paragraph data-line-1555">
+<p><a href="#Go-to-Top">Go to the Beginning</a></p>
+</div>
+<div class="paragraph data-line-1557">
+<p>[1] BrandPost Sponsored by Intel Security | Learn More Cloud Security By Jamie Tischart , &amp; |, J. T. (2016, October 18). DevOpsSec, SecDevOps, DevSecOps: What&#8217;s in a name? CSO Online. Retrieved December 9, 2022, from <a href="https://www.csoonline.com/article/3132078/devopssec-secdevops-devsecops-whats-in-a-name.html" class="undefined" data-href="https://www.csoonline.com/article/3132078/devopssec-secdevops-devsecops-whats-in-a-name.html">https://www.csoonline.com/article/3132078/devopssec-secdevops-devsecops-whats-in-a-name.html</a></p>
+</div>
+<div class="paragraph data-line-1559">
+<p>[2] SecDevOps vs DevSecOps: What&#8217;s the difference? Code Signing Store. (2022, April 18). Retrieved December 9, 2022, from <a href="https://codesigningstore.com/secdevops-vs-devsecops" class="undefined" data-href="https://codesigningstore.com/secdevops-vs-devsecops">https://codesigningstore.com/secdevops-vs-devsecops</a></p>
+</div>
+<div id="reference-three" class="paragraph data-line-1562">
+<p>[3] CVE. (n.d.). Retrieved December 9, 2022, from <a href="https://cve.mitre.org/" class="undefined" data-href="https://cve.mitre.org/">https://cve.mitre.org/</a></p>
+</div>
+<div id="reference-four" class="paragraph data-line-1565">
+<p>[4] CVEProject. (n.d.). CVEProject/cvelist: Pilot program for CVE submission through github. GitHub. Retrieved December 9, 2022, from <a href="https://github.com/CVEProject/cvelist" class="undefined" data-href="https://github.com/CVEProject/cvelist">https://github.com/CVEProject/cvelist</a></p>
+</div>
+<div id="reference-five" class="paragraph data-line-1568">
+<p>[5] National Vulnerability Database NVD. (n.d.). Retrieved December 9, 2022, from <a href="https://nvd.nist.gov/" class="undefined" data-href="https://nvd.nist.gov/">https://nvd.nist.gov/</a></p>
+</div>
+<div id="reference-six" class="paragraph data-line-1571">
+<p>[6] National Vulnerability data. NVD. (n.d.). Retrieved December 9, 2022, from <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228" class="undefined" data-href="https://nvd.nist.gov/vuln/detail/CVE-2021-44228">https://nvd.nist.gov/vuln/detail/CVE-2021-44228</a></p>
+</div>
+<div id="reference-seven" class="paragraph data-line-1574">
+<p>[7] Sciberras, N. (2019, May 16). Common platform enumeration (CPE) explained. Acunetix. Retrieved December 9, 2022, from <a href="https://www.acunetix.com/blog/articles/common-platform-enumeration-cpe-explained/" class="undefined" data-href="https://www.acunetix.com/blog/articles/common-platform-enumeration-cpe-explained/">https://www.acunetix.com/blog/articles/common-platform-enumeration-cpe-explained/</a></p>
+</div>
+<div id="reference-eight" class="paragraph data-line-1577">
+<p>[8] Intelligence, M. S. T. (2022, November 9). Analyzing attacks using the exchange vulnerabilities CVE-2022-41040 and CVE-2022-41082. Microsoft Security Blog. Retrieved December 9, 2022, from <a href="https://www.microsoft.com/en-us/security/blog/2022/09/30/analyzing-attacks-using-the-exchange-vulnerabilities-cve-2022-41040-and-cve-2022-41082/" class="undefined" data-href="https://www.microsoft.com/en-us/security/blog/2022/09/30/analyzing-attacks-using-the-exchange-vulnerabilities-cve-2022-41040-and-cve-2022-41082/">https://www.microsoft.com/en-us/security/blog/2022/09/30/analyzing-attacks-using-the-exchange-vulnerabilities-cve-2022-41040-and-cve-2022-41082/</a></p>
+</div>
+<div id="reference-nine" class="paragraph data-line-1580">
+<p>[9] Security vulnerabilities (Cross site scripting (XSS)). CVE security vulnerability database. Security vulnerabilities, exploits, references and more. (n.d.). Retrieved December 9, 2022, from <a href="https://www.cvedetails.com/vulnerability-list.php?vendor_id=0&amp;product_id=0&amp;version_id=0&amp;page=1&amp;hasexp=0&amp;opdos=0&amp;opec=0&amp;opov=0&amp;opcsrf=0&amp;opgpriv=0&amp;opsqli=0&amp;opxss=1&amp;opdirt=0&amp;opmemc=0&amp;ophttprs=0&amp;opbyp=0&amp;opfileinc=0&amp;opginf=0&amp;cvssscoremin=0&amp;cvssscoremax=0&amp;year=0&amp;cweid=0&amp;order=1&amp;trc=23942&amp;sha=e3bb5586965f5a13bfaa78233a10ebc3f9606d12" class="undefined" data-href="https://www.cvedetails.com/vulnerability-list.php?vendor_id=0&amp;product_id=0&amp;version_id=0&amp;page=1&amp;hasexp=0&amp;opdos=0&amp;opec=0&amp;opov=0&amp;opcsrf=0&amp;opgpriv=0&amp;opsqli=0&amp;opxss=1&amp;opdirt=0&amp;opmemc=0&amp;ophttprs=0&amp;opbyp=0&amp;opfileinc=0&amp;opginf=0&amp;cvssscoremin=0&amp;cvssscoremax=0&amp;year=0&amp;cweid=0&amp;order=1&amp;trc=23942&amp;sha=e3bb5586965f5a13bfaa78233a10ebc3f9606d12">https://www.cvedetails.com/vulnerability-list.php?vendor_id=0&amp;product_id=0&amp;version_id=0&amp;page=1&amp;hasexp=0&amp;opdos=0&amp;opec=0&amp;opov=0&amp;opcsrf=0&amp;opgpriv=0&amp;opsqli=0&amp;opxss=1&amp;opdirt=0&amp;opmemc=0&amp;ophttprs=0&amp;opbyp=0&amp;opfileinc=0&amp;opginf=0&amp;cvssscoremin=0&amp;cvssscoremax=0&amp;year=0&amp;cweid=0&amp;order=1&amp;trc=23942&amp;sha=e3bb5586965f5a13bfaa78233a10ebc3f9606d12</a></p>
+</div>
+<div id="reference-ten" class="paragraph data-line-1583">
+<p>[10] OpenSSL 3.0 vulnerabilities: CVE 2022-3786 and CVE 2022-3602. Trellix. (n.d.). Retrieved December 9, 2022, from <a href="https://www.trellix.com/en-us/about/newsroom/stories/research/openssl-3-0-vulnerabilities.html" class="undefined" data-href="https://www.trellix.com/en-us/about/newsroom/stories/research/openssl-3-0-vulnerabilities.html">https://www.trellix.com/en-us/about/newsroom/stories/research/openssl-3-0-vulnerabilities.html</a></p>
+</div>
+<div id="reference-eleven" class="paragraph data-line-1586">
+<p>[11] Synopsys Software Security: Software Integrity Group. Synopsys Software Security | Software Integrity Group. (n.d.). Retrieved December 9, 2022, from <a href="https://www.synopsys.com/software-integrity.html" class="undefined" data-href="https://www.synopsys.com/software-integrity.html">https://www.synopsys.com/software-integrity.html</a></p>
+</div>
+<div id="reference-twelve" class="paragraph data-line-1589">
+<p>[12] IEEE Xplore Full-text PDF: (n.d.). Retrieved December 9, 2022, from <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7169508" class="undefined" data-href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7169508">https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7169508</a></p>
+</div>
+<div id="reference-thirteen" class="paragraph data-line-1592">
+<p>[13] Common weakness enumeration. CWE. (n.d.). Retrieved December 9, 2022, from <a href="https://cwe.mitre.org/data/definitions/20.html" class="undefined" data-href="https://cwe.mitre.org/data/definitions/20.html">https://cwe.mitre.org/data/definitions/20.html</a></p>
+</div>
+<div id="reference-fourteen" class="paragraph data-line-1595">
+<p>[14] - <a href="https://github.com/Anna-Chadwick/AnnaProject" class="undefined" data-href="https://github.com/Anna-Chadwick/AnnaProject">https://github.com/Anna-Chadwick/AnnaProject</a></p>
+</div>
+<div id="reference-fifteen" class="paragraph data-line-1598">
+<p>[15] Dependency Check. dependency-check – About. (n.d.). Retrieved December 9, 2022, from <a href="https://jeremylong.github.io/DependencyCheck/" class="undefined" data-href="https://jeremylong.github.io/DependencyCheck/">https://jeremylong.github.io/DependencyCheck/</a></p>
+</div>
+<div id="reference-sixteen" class="paragraph data-line-1601">
+<p>[16] Jeremylong. (n.d.). Jeremylong/DependencyCheck: Owasp dependency-check is a software composition analysis utility that detects publicly disclosed vulnerabilities in application dependencies. GitHub. Retrieved December 9, 2022, from <a href="https://github.com/jeremylong/DependencyCheck" class="undefined" data-href="https://github.com/jeremylong/DependencyCheck">https://github.com/jeremylong/DependencyCheck</a></p>
+</div>
+<div id="reference-seventeen" class="paragraph data-line-1604">
+<p>[17] File type analyzers. dependency-check – File Type Analyzers. (n.d.). Retrieved December 9, 2022, from <a href="https://jeremylong.github.io/DependencyCheck/analyzers/index.html" class="undefined" data-href="https://jeremylong.github.io/DependencyCheck/analyzers/index.html">https://jeremylong.github.io/DependencyCheck/analyzers/index.html</a></p>
+</div>
+<div id="reference-eighteen" class="paragraph data-line-1607">
+<p>[18] <a href="https://jeremylong.github.io/DependencyCheck/general/suppression.html" class="undefined" data-href="https://jeremylong.github.io/DependencyCheck/general/suppression.html">https://jeremylong.github.io/DependencyCheck/general/suppression.html</a></p>
+</div>
+<div id="reference-nineteen" class="paragraph data-line-1610">
+<p>[19] Suppressing false positives. dependency-check – Suppressing False Positives. (n.d.). Retrieved December 9, 2022, from <a href="https://jeremylong.github.io/DependencyCheck/general/suppression.html" class="undefined" data-href="https://jeremylong.github.io/DependencyCheck/general/suppression.html">https://jeremylong.github.io/DependencyCheck/general/suppression.html</a></p>
+</div>
+<div id="reference-twenty" class="paragraph data-line-1613">
+<p>[20] Intel. (n.d.). Intel/CVE-bin-tool: The CVE binary tool helps you determine if your system includes known vulnerabilities. you can scan binaries for over 200 common, vulnerable components (openssl, libpng, Libxml2, expat and others), or if you know the components used, you can get a list of known vulnerabilities associated with an SBOM or a list of components and versions. GitHub. Retrieved December 9, 2022, from <a href="https://github.com/intel/cve-bin-tool#installing-cve-binary-tool" class="undefined" data-href="https://github.com/intel/cve-bin-tool#installing-cve-binary-tool">https://github.com/intel/cve-bin-tool#installing-cve-binary-tool</a></p>
+</div>
+<div id="reference-twenty-one" class="paragraph data-line-1616">
+<p>[21] Intel. (n.d.). Intel/CVE-bin-tool: The CVE binary tool helps you determine if your system includes known vulnerabilities. you can scan binaries for over 200 common, vulnerable components (openssl, libpng, Libxml2, expat and others), or if you know the components used, you can get a list of known vulnerabilities associated with an SBOM or a list of components and versions. GitHub. Retrieved December 9, 2022, from <a href="https://github.com/intel/cve-bin-tool#data-sources" class="undefined" data-href="https://github.com/intel/cve-bin-tool#data-sources">https://github.com/intel/cve-bin-tool#data-sources</a></p>
+</div>
+<div id="reference-twenty-two" class="paragraph data-line-1619">
+<p>[22] Current CVSS score distribution for all vulnerabilities. CVE security vulnerability database. Security vulnerabilities, exploits, references and more. (n.d.). Retrieved December 9, 2022, from <a href="https://www.cvedetails.com/" class="undefined" data-href="https://www.cvedetails.com/">https://www.cvedetails.com/</a></p>
+</div>
+<div id="reference-twenty-three" class="paragraph data-line-1622">
+<p>[23] Intel. (n.d.). Intel/CVE-bin-tool: The CVE binary tool helps you determine if your system includes known vulnerabilities. you can scan binaries for over 200 common, vulnerable components (openssl, libpng, Libxml2, expat and others), or if you know the components used, you can get a list of known vulnerabilities associated with an SBOM or a list of components and versions. GitHub. Retrieved December 9, 2022, from <a href="https://github.com/intel/cve-bin-tool#binary-checker-list" class="undefined" data-href="https://github.com/intel/cve-bin-tool#binary-checker-list">https://github.com/intel/cve-bin-tool#binary-checker-list</a></p>
+</div>
+<div id="reference-twenty-four" class="paragraph data-line-1626">
+<p>[24] National Vulnerability Database. NVD. (n.d.). Retrieved December 9, 2022, from <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-12904" class="undefined" data-href="https://nvd.nist.gov/vuln/detail/CVE-2019-12904">https://nvd.nist.gov/vuln/detail/CVE-2019-12904</a></p>
+</div>
+<div id="reference-twenty-five" class="paragraph data-line-1629">
+<p>[25] National Vulnerability Database. NVD. (n.d.). Retrieved December 9, 2022, from <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-33560" class="undefined" data-href="https://nvd.nist.gov/vuln/detail/CVE-2021-33560">https://nvd.nist.gov/vuln/detail/CVE-2021-33560</a></p>
+</div>
+<div id="reference-twenty-six" class="paragraph data-line-1632">
+<p>[26] National Vulnerability Database. NVD. (n.d.). Retrieved December 9, 2022, from <a href="https://nvd.nist.gov/vuln/detail/CVE-2021-40528" class="undefined" data-href="https://nvd.nist.gov/vuln/detail/CVE-2021-40528">https://nvd.nist.gov/vuln/detail/CVE-2021-40528</a></p>
+</div>
+<div id="reference-twenty-seven" class="paragraph data-line-1635">
+<p>[27] CodeQL for Visual Studio code. CodeQL. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/docs/codeql-for-visual-studio-code/" class="undefined" data-href="https://codeql.github.com/docs/codeql-for-visual-studio-code/">https://codeql.github.com/docs/codeql-for-visual-studio-code/</a></p>
+</div>
+<div id="reference-twenty-eight" class="paragraph data-line-1638">
+<p>[28] Github. (n.d.). Github/vscode-codeql-starter: Starter workspace to use with the CodeQL extension for Visual Studio Code. GitHub. Retrieved December 12, 2022, from <a href="https://github.com/github/vscode-codeql-starter" class="undefined" data-href="https://github.com/github/vscode-codeql-starter">https://github.com/github/vscode-codeql-starter</a></p>
+</div>
+<div id="reference-twenty-nine" class="paragraph data-line-1641">
+<p>[29] Creating codeql databases. CodeQL. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/docs/codeql-cli/creating-codeql-databases/" class="undefined" data-href="https://codeql.github.com/docs/codeql-cli/creating-codeql-databases/">https://codeql.github.com/docs/codeql-cli/creating-codeql-databases/</a></p>
+</div>
+<div id="reference-thirty" class="paragraph data-line-1644">
+<p>[30] National Vulnerability Database. NVD. (n.d.). Retrieved December 9, 2022, from <a href="https://nvd.nist.gov/vuln/detail/CVE-2022-21449" class="undefined" data-href="https://nvd.nist.gov/vuln/detail/CVE-2022-21449">https://nvd.nist.gov/vuln/detail/CVE-2022-21449</a></p>
+</div>
+<div id="reference-thirty-one" class="paragraph data-line-1647">
+<p>[31] Psychic Signatures Vulnerability. Medium. (n.d.). Retrieved December 9, 2022, from <a href="https://infosecwriteups.com/what-caused-psychic-signatures-vulnerability-cve-2022-2144960542811eac2" class="undefined" data-href="https://infosecwriteups.com/what-caused-psychic-signatures-vulnerability-cve-2022-2144960542811eac2">https://infosecwriteups.com/what-caused-psychic-signatures-vulnerability-cve-2022-2144960542811eac2</a></p>
+</div>
+<div id="reference-thirty-two" class="paragraph data-line-1650">
+<p>[32] CodeQL library Java. Index. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/codeql-standard-libraries/java/" class="undefined" data-href="https://codeql.github.com/codeql-standard-libraries/java/">https://codeql.github.com/codeql-standard-libraries/java/</a></p>
+</div>
+<div id="reference-thirty-three" class="paragraph data-line-1653">
+<p>[33] CodeQL for Java and Kotlin. CodeQL. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/docs/codeql-language-guides/codeql-for-java/" class="undefined" data-href="https://codeql.github.com/docs/codeql-language-guides/codeql-for-java/">https://codeql.github.com/docs/codeql-language-guides/codeql-for-java/</a></p>
+</div>
+<div id="reference-thirty-four" class="paragraph data-line-1656">
+<p>[34] About codeql queries. CodeQL. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/" class="undefined" data-href="https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/">https://codeql.github.com/docs/writing-codeql-queries/about-codeql-queries/</a></p>
+</div>
+<div id="reference-thirty-five" class="paragraph data-line-1659">
+<p>[35] CodeQL Standard Libraries. CodeQL standard libraries. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/codeql-standard-libraries/" class="undefined" data-href="https://codeql.github.com/codeql-standard-libraries/">https://codeql.github.com/codeql-standard-libraries/</a></p>
+</div>
+<div id="reference-thirty-six" class="paragraph data-line-1662">
+<p>[36] Class method. Method. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/codeql-standard-libraries/java/semmle/code/java/Member.qll/type.Member$Method.html" class="undefined" data-href="https://codeql.github.com/codeql-standard-libraries/java/semmle/code/java/Member.qll/type.Member$Method.html">https://codeql.github.com/codeql-standard-libraries/java/semmle/code/java/Member.qll/type.Member$Method.html</a></p>
+</div>
+<div id="reference-thirty-seven" class="paragraph data-line-1665">
+<p>[37] Class Method Access. MethodAccess. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/codeql-standard-libraries/java/semmle/code/java/Expr.qll/type.Expr$MethodAccess.html" class="undefined" data-href="https://codeql.github.com/codeql-standard-libraries/java/semmle/code/java/Expr.qll/type.Expr$MethodAccess.html">https://codeql.github.com/codeql-standard-libraries/java/semmle/code/java/Expr.qll/type.Expr$MethodAccess.html</a></p>
+</div>
+<div id="reference-thirty-eight" class="paragraph data-line-1668">
+<p>[38] CodeQL query help for java. CodeQL query help for Java - CodeQL query help documentation. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/codeql-query-help/java/" class="undefined" data-href="https://codeql.github.com/codeql-query-help/java/">https://codeql.github.com/codeql-query-help/java/</a></p>
+</div>
+<div id="reference-thirty-nine" class="paragraph data-line-1671">
+<p>[39] Dangerous non-short-circuit logic¶. Dangerous non-short-circuit logic - CodeQL query help documentation. (n.d.). Retrieved December 9, 2022, from <a href="https://codeql.github.com/codeql-query-help/java/java-non-short-circuit-evaluation/" class="undefined" data-href="https://codeql.github.com/codeql-query-help/java/java-non-short-circuit-evaluation/">https://codeql.github.com/codeql-query-help/java/java-non-short-circuit-evaluation/</a></p>
+</div>
+<div id="reference-forty" class="paragraph data-line-1674">
+<p>[40] Common weakness enumeration. CWE. (n.d.). Retrieved December 9, 2022, from <a href="https://cwe.mitre.org/data/definitions/691.html" class="undefined" data-href="https://cwe.mitre.org/data/definitions/691.html">https://cwe.mitre.org/data/definitions/691.html</a></p>
+</div>
+<div id="reference-forty-one" class="paragraph data-line-1677">
+<p>[41] Github. (n.d.). Github/codeql: CodeQL: The Libraries and queries that power security researchers around the world, as well as code scanning in github advanced security. GitHub. Retrieved December 9, 2022, from <a href="https://github.com/github/codeql" class="undefined" data-href="https://github.com/github/codeql">https://github.com/github/codeql</a></p>
+</div>
+<div id="reference-forty-two" class="paragraph data-line-1680">
+<p>[42] Common weakness enumeration. CWE. (n.d.). Retrieved December 9, 2022, from <a href="https://cwe.mitre.org/data/definitions/476.html" class="undefined" data-href="https://cwe.mitre.org/data/definitions/476.html">https://cwe.mitre.org/data/definitions/476.html</a></p>
+</div>
+<div id="reference-forty-three" class="paragraph data-line-1683">
+<p>[43] Get started with comby · Comby. Comby. (n.d.). Retrieved December 9, 2022, from <a href="https://comby.dev/docs/get-started" class="undefined" data-href="https://comby.dev/docs/get-started">https://comby.dev/docs/get-started</a></p>
+</div>
+<div id="reference-forty-four" class="paragraph data-line-1686">
+<p>[44] The basics · Comby. Comby. (n.d.). Retrieved December 9, 2022, from <a href="https://comby.dev/docs/basic-usage" class="undefined" data-href="https://comby.dev/docs/basic-usage">https://comby.dev/docs/basic-usage</a></p>
+</div>
+<div id="reference-forty-five" class="paragraph data-line-1689">
+<p>[45] Syntax reference · Comby. Comby. (n.d.). Retrieved December 9, 2022, from <a href="https://comby.dev/docs/syntax-reference" class="undefined" data-href="https://comby.dev/docs/syntax-reference">https://comby.dev/docs/syntax-reference</a></p>
+</div>
+<div id="reference-forty-six" class="paragraph data-line-1692">
+<p>[46] Advanced usage · Comby. Comby. (n.d.). Retrieved December 9, 2022, from <a href="https://comby.dev/docs/advanced-usage" class="undefined" data-href="https://comby.dev/docs/advanced-usage">https://comby.dev/docs/advanced-usage</a></p>
+</div>
+<div id="reference-forty-seven" class="paragraph data-line-1695">
+<p>[47] Common weakness enumeration. CWE. (n.d.). Retrieved December 9, 2022, from <a href="https://cwe.mitre.org/data/definitions/193.html" class="undefined" data-href="https://cwe.mitre.org/data/definitions/193.html">https://cwe.mitre.org/data/definitions/193.html</a></p>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2023-01-04 19:42:51 -0600
+</div>
+</div>
+</body>
+</html>
